@@ -60,10 +60,10 @@ public class BannerCadMaterias extends javax.swing.JPanel {
 
         rgbBtn = new javax.swing.ButtonGroup();
         lblClose = new javax.swing.JLabel();
-        lblTitulo = new javax.swing.JLabel();
         rbCad = new javax.swing.JRadioButton();
         rbDelete = new javax.swing.JRadioButton();
         pnCad = new javax.swing.JPanel();
+        lblTitulo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(750, 417));
@@ -91,12 +91,6 @@ public class BannerCadMaterias extends javax.swing.JPanel {
             }
         });
 
-        lblTitulo.setFont(new java.awt.Font("BackToSchool", 1, 40)); // NOI18N
-        lblTitulo.setForeground(new java.awt.Color(0, 102, 255));
-        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Cadastro de materias");
-        lblTitulo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-
         rbCad.setFont(new java.awt.Font("Segoe Print", 1, 16)); // NOI18N
         rbCad.setForeground(new java.awt.Color(0, 153, 0));
         rbCad.setText("Cadastrar Novas Matérias");
@@ -118,6 +112,8 @@ public class BannerCadMaterias extends javax.swing.JPanel {
         pnCad.setBackground(new java.awt.Color(255, 255, 255));
         pnCad.setLayout(new java.awt.BorderLayout());
 
+        lblTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/titulo_cad_materias.png"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -125,8 +121,8 @@ public class BannerCadMaterias extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 275, Short.MAX_VALUE)
-                        .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblClose))
                     .addGroup(layout.createSequentialGroup()
@@ -148,8 +144,8 @@ public class BannerCadMaterias extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblClose))
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(9, 9, 9)
+                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rbCad, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(rbDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
