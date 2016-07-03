@@ -34,24 +34,30 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pnPrincipal = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(925, 560));
-        setSize(new java.awt.Dimension(925, 560));
+        setMaximumSize(new java.awt.Dimension(980, 590));
+        setMinimumSize(new java.awt.Dimension(980, 590));
+        setSize(new java.awt.Dimension(980, 590));
 
         pnPrincipal.setBackground(new java.awt.Color(255, 255, 255));
-        pnPrincipal.setMaximumSize(new java.awt.Dimension(925, 560));
-        pnPrincipal.setMinimumSize(new java.awt.Dimension(925, 560));
-        pnPrincipal.setPreferredSize(new java.awt.Dimension(925, 560));
+        pnPrincipal.setMaximumSize(new java.awt.Dimension(980, 590));
+        pnPrincipal.setMinimumSize(new java.awt.Dimension(980, 590));
+        pnPrincipal.setPreferredSize(new java.awt.Dimension(980, 590));
+        pnPrincipal.setRequestFocusEnabled(false);
         pnPrincipal.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();

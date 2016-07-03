@@ -30,7 +30,7 @@ public class BannerPrincipal extends javax.swing.JPanel {
      */
     public BannerPrincipal() {
         initComponents();
-
+        
         tela_materia.setVisible(false);
         tela_pergunta.setVisible(false);
 
@@ -50,9 +50,9 @@ public class BannerPrincipal extends javax.swing.JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.drawImage(imagemFundo, 0, 0, this);
-        g.drawImage(imagemFundo2, 350, 210, this);
-        g.drawImage(imagemLogo, 170, 150, this);
+        g.drawImage(imagemFundo, 0, 0, this.getWidth(), 350, this);
+        g.drawImage(imagemFundo2, 390, 230, this);
+        g.drawImage(imagemLogo, 190, 180, this);
     }
 
     /**
@@ -268,7 +268,8 @@ public class BannerPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_lblBTEstudeMouseMoved
 
     private void lblBTEstudeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBTEstudeMouseClicked
-        
+        TelaEscolhaEstuda tela = new TelaEscolhaEstuda();
+        tela.setVisible(true);
     }//GEN-LAST:event_lblBTEstudeMouseClicked
 
     private void lblBTEstudeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBTEstudeMouseExited
