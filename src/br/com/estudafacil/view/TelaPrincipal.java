@@ -5,6 +5,8 @@
  */
 package br.com.estudafacil.view;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author Rick-Note
@@ -16,10 +18,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
-        
-        BannerPrincipal painel = new BannerPrincipal();
+
+        BannerPrincipal painel = new BannerPrincipal(this);
         pnPrincipal.add(painel);
-        
+
+    }
+    
+    public void recebePainel(JPanel pn) {
+        pnPrincipal.removeAll();
+        pnPrincipal.add(pn);
+        pnPrincipal.repaint();
     }
 
     /**
@@ -102,4 +110,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel pnPrincipal;
     // End of variables declaration//GEN-END:variables
+
+
 }

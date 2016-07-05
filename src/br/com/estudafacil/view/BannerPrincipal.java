@@ -14,12 +14,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Rick-Note
  */
 public class BannerPrincipal extends javax.swing.JPanel {
+    
+    TelaPrincipal telaPrinc;
 
     BufferedImage imagemFundo, imagemFundo2, imagemLogo;
     TelaCadMaterias tela_materia = new TelaCadMaterias();
@@ -28,7 +31,9 @@ public class BannerPrincipal extends javax.swing.JPanel {
     /**
      * Creates new form BannerCad
      */
-    public BannerPrincipal() {
+    public BannerPrincipal(TelaPrincipal telaPrincial) {
+        this.telaPrinc = telaPrincial;
+        
         initComponents();
         
         tela_materia.setVisible(false);
@@ -180,7 +185,7 @@ public class BannerPrincipal extends javax.swing.JPanel {
                     .addComponent(lblBTRanking)
                     .addComponent(lblBTCadMateria)
                     .addComponent(lblBTCadPergunta))
-                .addContainerGap(492, Short.MAX_VALUE))
+                .addContainerGap(493, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -268,7 +273,7 @@ public class BannerPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_lblBTEstudeMouseMoved
 
     private void lblBTEstudeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBTEstudeMouseClicked
-        TelaEscolhaEstuda tela = new TelaEscolhaEstuda();
+        TelaEscolhaEstuda tela = new TelaEscolhaEstuda(telaPrinc);
         tela.setVisible(true);
     }//GEN-LAST:event_lblBTEstudeMouseClicked
 
@@ -291,4 +296,6 @@ public class BannerPrincipal extends javax.swing.JPanel {
     private javax.swing.JLabel lblBTEstude;
     private javax.swing.JLabel lblBTRanking;
     // End of variables declaration//GEN-END:variables
+  
 }
+

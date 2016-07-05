@@ -9,17 +9,18 @@ package br.com.estudafacil.view;
  *
  * @author Rick-Note
  */
-public class TelaEscolhaEstuda extends javax.swing.JFrame {
+public class TelaEstudo extends javax.swing.JFrame {
+    
     TelaPrincipal telaPrinc;
-    /**
-     * Creates new form TelaEscolhaEstuda
-     */
-    public TelaEscolhaEstuda(TelaPrincipal telaPrincipal) {
-        this.telaPrinc = telaPrincipal;
+
+    
+    
+    public TelaEstudo(TelaPrincipal telaPrincipal) {
         
+        this.telaPrinc = telaPrincipal;
+        BannerEstudo panelEstudo = new BannerEstudo(telaPrinc);
         initComponents();
-        PanelEscolhaEstuda painel = new PanelEscolhaEstuda(telaPrinc);
-        pnPrincipal.add(painel);
+        this.pnPrincipal.add(panelEstudo);
     }
 
     /**
@@ -34,14 +35,12 @@ public class TelaEscolhaEstuda extends javax.swing.JFrame {
         pnPrincipal = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(397, 198));
-        setMinimumSize(new java.awt.Dimension(397, 198));
-        setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(397, 198));
+        setMaximumSize(new java.awt.Dimension(925, 560));
+        setMinimumSize(new java.awt.Dimension(925, 560));
+        setPreferredSize(new java.awt.Dimension(925, 560));
 
-        pnPrincipal.setMaximumSize(new java.awt.Dimension(397, 198));
-        pnPrincipal.setMinimumSize(new java.awt.Dimension(397, 198));
-        pnPrincipal.setPreferredSize(new java.awt.Dimension(397, 198));
+        pnPrincipal.setMaximumSize(new java.awt.Dimension(925, 560));
+        pnPrincipal.setMinimumSize(new java.awt.Dimension(925, 560));
         pnPrincipal.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -58,7 +57,7 @@ public class TelaEscolhaEstuda extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel pnPrincipal;
     // End of variables declaration//GEN-END:variables

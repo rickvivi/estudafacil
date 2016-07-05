@@ -24,6 +24,8 @@ import javax.imageio.ImageIO;
  */
 public class PanelEscolhaEstuda extends javax.swing.JPanel {
 
+    TelaPrincipal telaPrinc;
+    
     BufferedImage fundoEscolhaEstuda;
     
     ArrayList<Materias> lista = new ArrayList<>();
@@ -33,7 +35,10 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
     /**
      * Creates new form PanelEscolhaEstuda
      */
-    public PanelEscolhaEstuda() {
+    public PanelEscolhaEstuda(TelaPrincipal telaPrincipal) {
+        
+        this.telaPrinc = telaPrincipal;
+        
         initComponents();
 
         rbPeriodo.add(rbPrimeiro);
@@ -77,13 +82,15 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
         rbSegundo = new javax.swing.JRadioButton();
         rbTotal = new javax.swing.JRadioButton();
         lblClose = new javax.swing.JLabel();
+        btnOK = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(51, 51, 255));
         setMaximumSize(new java.awt.Dimension(397, 198));
         setMinimumSize(new java.awt.Dimension(397, 198));
         setPreferredSize(new java.awt.Dimension(397, 198));
 
-        lblMateria.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblMateria.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        lblMateria.setForeground(new java.awt.Color(255, 255, 255));
         lblMateria.setText("Escolha a Matéria:");
 
         jcbListaMaterias.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -94,16 +101,21 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
             }
         });
 
-        lblPeriodo.setFont(new java.awt.Font("Arial", 0, 16)); // NOI18N
+        lblPeriodo.setBackground(new java.awt.Color(255, 255, 255));
+        lblPeriodo.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        lblPeriodo.setForeground(new java.awt.Color(255, 255, 255));
         lblPeriodo.setText("Escolha o Período que deseja estudar:");
 
         rbPrimeiro.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbPrimeiro.setForeground(new java.awt.Color(255, 255, 255));
         rbPrimeiro.setText("1º Bimestre");
 
         rbSegundo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbSegundo.setForeground(new java.awt.Color(255, 255, 255));
         rbSegundo.setText("2º Bimestre");
 
         rbTotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        rbTotal.setForeground(new java.awt.Color(255, 255, 255));
         rbTotal.setText("Semestral");
 
         lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/close_normal.png"))); // NOI18N
@@ -127,6 +139,13 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
             }
         });
 
+        btnOK.setText("OK");
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOKActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -136,14 +155,16 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbListaMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(rbPrimeiro, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(rbSegundo, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(10, 10, 10)
-                                .addComponent(rbTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jcbListaMaterias, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(btnOK, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(rbTotal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(lblPeriodo, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(36, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -169,7 +190,9 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
                     .addComponent(rbPrimeiro)
                     .addComponent(rbSegundo)
                     .addComponent(rbTotal))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnOK, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -208,8 +231,28 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
         lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/close_normal.png")));
     }//GEN-LAST:event_lblCloseMouseReleased
 
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+              
+        /**
+         * ESSE MÉTODO FINALIZA O FRAME TELACADASTRO
+         */
+        Container c = this.getParent();
+        while (!(c instanceof javax.swing.JFrame)) {
+            c = c.getParent();
+        }
+
+        ((javax.swing.JFrame) c).dispose();
+        
+        this.telaPrinc.dispose();
+        
+        TelaEstudo telaEstudo = new TelaEstudo(telaPrinc);
+        telaEstudo.setVisible(true);
+        
+    }//GEN-LAST:event_btnOKActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnOK;
     private javax.swing.JComboBox<String> jcbListaMaterias;
     private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblMateria;
