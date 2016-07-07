@@ -10,18 +10,19 @@ package br.com.estudafacil.view;
  * @author Rick-Note
  */
 public class TelaEstudo extends javax.swing.JFrame {
-    
-    TelaPrincipal telaPrinc;
 
-    
-    
+    TelaPrincipal telaPrinc;
+   
     public TelaEstudo(TelaPrincipal telaPrincipal) {
-        
+       
         this.telaPrinc = telaPrincipal;
         BannerEstudo panelEstudo = new BannerEstudo(telaPrinc);
         initComponents();
+
         this.pnPrincipal.add(panelEstudo);
+
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -37,7 +38,7 @@ public class TelaEstudo extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(925, 560));
         setMinimumSize(new java.awt.Dimension(925, 560));
-        setPreferredSize(new java.awt.Dimension(925, 560));
+        setUndecorated(true);
 
         pnPrincipal.setMaximumSize(new java.awt.Dimension(925, 560));
         pnPrincipal.setMinimumSize(new java.awt.Dimension(925, 560));

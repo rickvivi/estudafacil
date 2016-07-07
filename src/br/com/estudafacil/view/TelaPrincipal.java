@@ -18,7 +18,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
-
+        this.setResizable(false); //Impossibilita de alterar o tamanho do Frame
+        
         BannerPrincipal painel = new BannerPrincipal(this);
         pnPrincipal.add(painel);
 

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -232,8 +233,13 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
     }//GEN-LAST:event_lblCloseMouseReleased
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-              
-        /**
+          
+        if(jcbListaMaterias.getSelectedIndex() == 0){
+            JOptionPane.showMessageDialog(null, "Escolha a Matéria que deseja estudar.");
+        } else if(!rbPrimeiro.isSelected() && !rbSegundo.isSelected() && !rbTotal.isSelected()){
+            JOptionPane.showMessageDialog(null, "Escolha o Perído que deseja estudar!");
+        } else {
+            /**
          * ESSE MÉTODO FINALIZA O FRAME TELACADASTRO
          */
         Container c = this.getParent();
@@ -248,6 +254,8 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
         TelaEstudo telaEstudo = new TelaEstudo(telaPrinc);
         telaEstudo.setVisible(true);
         
+        } 
+                
     }//GEN-LAST:event_btnOKActionPerformed
 
 
