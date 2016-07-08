@@ -20,24 +20,22 @@ import javax.swing.JPanel;
  *
  * @author Rick-Note
  */
-public class BannerPrincipal extends javax.swing.JPanel {
+public class PanelPrincipal extends javax.swing.JPanel {
     
     TelaPrincipal telaPrinc;
 
     BufferedImage imagemFundo, imagemFundo2, imagemLogo;
     TelaCadMaterias tela_materia = new TelaCadMaterias();
-    TelaCadastro tela_pergunta = new TelaCadastro();
 
     /**
      * Creates new form BannerCad
      */
-    public BannerPrincipal(TelaPrincipal telaPrincial) {
+    public PanelPrincipal(TelaPrincipal telaPrincial) {
         this.telaPrinc = telaPrincial;
         
         initComponents();
         
         tela_materia.setVisible(false);
-        tela_pergunta.setVisible(false);
 
         try {
             File img = new File("src/botoes/bannerfundo.png");
@@ -47,7 +45,7 @@ public class BannerPrincipal extends javax.swing.JPanel {
             this.imagemFundo2 = ImageIO.read(img2);
             this.imagemLogo = ImageIO.read(imgLogo);
         } catch (IOException ex) {
-            Logger.getLogger(BannerPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -236,9 +234,11 @@ public class BannerPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_lblBTCadMateriaMouseClicked
 
     private void lblBTCadPerguntaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBTCadPerguntaMouseClicked
-        if (!tela_pergunta.isVisible()) {
-            tela_pergunta.setVisible(true);
-        }
+//        if (!tela_pergunta.isVisible()) {
+//            tela_pergunta.setVisible(true);
+//        }
+        TelaCadPerguntas tela = new TelaCadPerguntas(telaPrinc, true);
+        tela.setVisible(true);
     }//GEN-LAST:event_lblBTCadPerguntaMouseClicked
 
     /**
@@ -273,7 +273,7 @@ public class BannerPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_lblBTEstudeMouseMoved
 
     private void lblBTEstudeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBTEstudeMouseClicked
-        TelaEscolhaEstuda tela = new TelaEscolhaEstuda(telaPrinc);
+        TelaEscolhaEstudo tela = new TelaEscolhaEstudo(telaPrinc, true, telaPrinc);
         tela.setVisible(true);
     }//GEN-LAST:event_lblBTEstudeMouseClicked
 

@@ -5,32 +5,28 @@
  */
 package br.com.estudafacil.view;
 
-import javax.swing.JPanel;
-
 /**
  *
- * @author Rick-Note
+ * @author DES4
  */
-public class TelaPrincipal extends javax.swing.JFrame {
+public class TelaCadPerguntas extends javax.swing.JDialog {
 
     /**
-     * Creates new form TelaPrincipal
+     * Creates new form TelaCadPerguntas
      */
-    public TelaPrincipal() {
+    public TelaCadPerguntas(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
-        this.setResizable(false); //Impossibilita de alterar o tamanho do Frame
         
-        PanelPrincipal painel = new PanelPrincipal(this);
+        PanelCadPerguntas painel = new PanelCadPerguntas(this);
         pnPrincipal.add(painel);
-
+        
     }
     
-    public void recebePainel(JPanel pn) {
-        pnPrincipal.removeAll();
-        pnPrincipal.add(pn);
-        pnPrincipal.repaint();
+    public void fechaDialogo(){
+        this.dispose();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,31 +38,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         pnPrincipal = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(980, 590));
-        setMinimumSize(new java.awt.Dimension(980, 590));
-        setSize(new java.awt.Dimension(980, 590));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(925, 560));
+        setMinimumSize(new java.awt.Dimension(925, 560));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(925, 560));
 
-        pnPrincipal.setBackground(new java.awt.Color(255, 255, 255));
-        pnPrincipal.setMaximumSize(new java.awt.Dimension(980, 590));
-        pnPrincipal.setMinimumSize(new java.awt.Dimension(980, 590));
-        pnPrincipal.setPreferredSize(new java.awt.Dimension(980, 590));
-        pnPrincipal.setRequestFocusEnabled(false);
         pnPrincipal.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 980, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(pnPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 590, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(pnPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -90,20 +78,27 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadPerguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadPerguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadPerguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TelaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TelaCadPerguntas.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TelaPrincipal().setVisible(true);
+                TelaCadPerguntas dialog = new TelaCadPerguntas(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
@@ -111,6 +106,4 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel pnPrincipal;
     // End of variables declaration//GEN-END:variables
-
-
 }

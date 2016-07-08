@@ -7,17 +7,18 @@ package br.com.estudafacil.view;
 
 /**
  *
- * @author Rick-Note
+ * @author DES4
  */
-public class TelaEscolhaEstuda extends javax.swing.JFrame {
+public class TelaEscolhaEstudo extends javax.swing.JDialog {
+
+    
     TelaPrincipal telaPrinc;
-    /**
-     * Creates new form TelaEscolhaEstuda
-     */
-    public TelaEscolhaEstuda(TelaPrincipal telaPrincipal) {
+    
+    public TelaEscolhaEstudo(java.awt.Frame parent, boolean modal, TelaPrincipal telaPrincipal) {
+        super(parent, modal);
         this.telaPrinc = telaPrincipal;
-        
         initComponents();
+        
         PanelEscolhaEstuda painel = new PanelEscolhaEstuda(telaPrinc);
         pnPrincipal.add(painel);
     }
@@ -33,15 +34,11 @@ public class TelaEscolhaEstuda extends javax.swing.JFrame {
 
         pnPrincipal = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(397, 198));
         setMinimumSize(new java.awt.Dimension(397, 198));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(397, 198));
 
-        pnPrincipal.setMaximumSize(new java.awt.Dimension(397, 198));
-        pnPrincipal.setMinimumSize(new java.awt.Dimension(397, 198));
-        pnPrincipal.setPreferredSize(new java.awt.Dimension(397, 198));
         pnPrincipal.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -58,7 +55,7 @@ public class TelaEscolhaEstuda extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel pnPrincipal;
     // End of variables declaration//GEN-END:variables

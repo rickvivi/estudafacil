@@ -141,7 +141,6 @@
                               <Component id="lblNext" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>

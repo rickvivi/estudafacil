@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
  *
  * @author Rick-Note
  */
-public class BannerCadastro extends javax.swing.JPanel {
+public class PanelCadPerguntas extends javax.swing.JPanel {
 
     BufferedImage imagemFundo;
     
@@ -34,16 +34,16 @@ public class BannerCadastro extends javax.swing.JPanel {
     ArrayList<Perguntas> lista = new ArrayList<>();
     ArrayList<Materias> listaMaterias = new ArrayList<>();
     
-    /**
-     * Creates new form BannerCadastro
-     */
-    public BannerCadastro() {
+    TelaCadPerguntas telaCadPerguntas;
+    
+    public PanelCadPerguntas(TelaCadPerguntas telaCad) {
+        this.telaCadPerguntas = telaCad;
         initComponents();
         
         try {
             this.imagemFundo = ImageIO.read(new File("src/Botoes/bannerazul.png"));
         } catch (IOException ex) {
-            Logger.getLogger(BannerCadastro.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelCadPerguntas.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         txtPergunta.setVisible(false);
@@ -85,7 +85,7 @@ public class BannerCadastro extends javax.swing.JPanel {
         lblClose = new javax.swing.JLabel();
         rbSegundo = new javax.swing.JRadioButton();
         rbPrimeiro = new javax.swing.JRadioButton();
-        jcbMaterias = new javax.swing.JComboBox<>();
+        jcbMaterias = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -333,8 +333,7 @@ public class BannerCadastro extends javax.swing.JPanel {
                                 .addComponent(btnDeleta, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(lblNext)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(lblNext)))))
                 .addGap(5, 5, 5)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(71, Short.MAX_VALUE))
@@ -346,18 +345,7 @@ public class BannerCadastro extends javax.swing.JPanel {
     }//GEN-LAST:event_lblCloseMouseMoved
 
     private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
-       
-        /**
-         * ESSE MÉTODO FINALIZA O FRAME TELACADASTRO
-         */
-        
-        Container c = this.getParent();
-        while (!(c instanceof javax.swing.JFrame)){
-            c = c.getParent();
-        }
-        
-        ((javax.swing.JFrame)c).dispose();
-        
+        telaCadPerguntas.dispose();     
         
     }//GEN-LAST:event_lblCloseMouseClicked
 
