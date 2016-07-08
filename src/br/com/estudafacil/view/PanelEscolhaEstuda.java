@@ -7,7 +7,6 @@ package br.com.estudafacil.view;
 
 import br.com.estudafacil.controller.MateriasDAO;
 import br.com.estudafacil.model.Materias;
-import br.com.estudafacil.model.Materias;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -26,43 +25,43 @@ import javax.swing.JOptionPane;
 public class PanelEscolhaEstuda extends javax.swing.JPanel {
 
     TelaPrincipal telaPrinc;
-    
+
     BufferedImage fundoEscolhaEstuda;
-    
+
     ArrayList<Materias> lista = new ArrayList<>();
     MateriasDAO dao = new MateriasDAO();
-    
 
-    /**
-     * Creates new form PanelEscolhaEstuda
-     */
     public PanelEscolhaEstuda(TelaPrincipal telaPrincipal) {
-        
+
         this.telaPrinc = telaPrincipal;
-        
+
         initComponents();
 
         rbPeriodo.add(rbPrimeiro);
         rbPeriodo.add(rbSegundo);
         rbPeriodo.add(rbTotal);
         
+        rbPrimeiro.setActionCommand("primeiro");
+        rbSegundo.setActionCommand("segundo");
+        rbTotal.setActionCommand("total");
+        
         try {
             this.fundoEscolhaEstuda = ImageIO.read(new File("src/botoes/fundo_escolha_estuda.jpg"));
         } catch (IOException ex) {
             Logger.getLogger(PanelEscolhaEstuda.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         lista = dao.carregaMaterias();
-        
-        for(Materias x : lista){
+
+        for (Materias x : lista) {
             jcbListaMaterias.addItem(x.getMateria());
         }
-        
+
     }
-    
-    public void paintComponent(Graphics g){
+
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+
         g.drawImage(fundoEscolhaEstuda, 0, 0, this);
     }
 
@@ -208,15 +207,14 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
     private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
 
         /**
-        * ESSE MÉTODO FINALIZA O FRAME TELACADASTRO
-        */
-
+         * ESSE MÉTODO FINALIZA O FRAME TELACADASTRO
+         */
         Container c = this.getParent();
-        while (!(c instanceof javax.swing.JFrame)){
+        while (!(c instanceof javax.swing.JFrame)) {
             c = c.getParent();
         }
 
-        ((javax.swing.JFrame)c).dispose();
+        ((javax.swing.JFrame) c).dispose();
 
     }//GEN-LAST:event_lblCloseMouseClicked
 
@@ -233,7 +231,7 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
     }//GEN-LAST:event_lblCloseMouseReleased
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
-          
+
         if(jcbListaMaterias.getSelectedIndex() == 0){
             JOptionPane.showMessageDialog(null, "Escolha a Matéria que deseja estudar.");
         } else if(!rbPrimeiro.isSelected() && !rbSegundo.isSelected() && !rbTotal.isSelected()){
@@ -251,11 +249,13 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
         
         this.telaPrinc.dispose();
         
-        TelaEstudo telaEstudo = new TelaEstudo(telaPrinc);
+        String mat = (String) jcbListaMaterias.getSelectedItem();
+        String prd = rbPeriodo.getSelection().getActionCommand();
+        
+        TelaEstudo telaEstudo = new TelaEstudo(telaPrinc, mat, prd);
         telaEstudo.setVisible(true);
         
         } 
-                
     }//GEN-LAST:event_btnOKActionPerformed
 
 
