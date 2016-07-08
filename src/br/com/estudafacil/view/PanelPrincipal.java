@@ -25,7 +25,6 @@ public class PanelPrincipal extends javax.swing.JPanel {
     TelaPrincipal telaPrinc;
 
     BufferedImage imagemFundo, imagemFundo2, imagemLogo;
-    TelaCadMaterias tela_materia = new TelaCadMaterias();
 
     /**
      * Creates new form BannerCad
@@ -35,8 +34,6 @@ public class PanelPrincipal extends javax.swing.JPanel {
         
         initComponents();
         
-        tela_materia.setVisible(false);
-
         try {
             File img = new File("src/botoes/bannerfundo.png");
             File img2 = new File("src/botoes/sala_aula.jpg");
@@ -73,6 +70,8 @@ public class PanelPrincipal extends javax.swing.JPanel {
         lblBTEstude = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(925, 560));
+        setMinimumSize(new java.awt.Dimension(925, 560));
         setPreferredSize(new java.awt.Dimension(925, 560));
 
         lblBTCadMateria.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/cad_materia_1.png"))); // NOI18N
@@ -183,7 +182,7 @@ public class PanelPrincipal extends javax.swing.JPanel {
                     .addComponent(lblBTRanking)
                     .addComponent(lblBTCadMateria)
                     .addComponent(lblBTCadPergunta))
-                .addContainerGap(493, Short.MAX_VALUE))
+                .addContainerGap(492, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -228,9 +227,11 @@ public class PanelPrincipal extends javax.swing.JPanel {
 
 
     private void lblBTCadMateriaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBTCadMateriaMouseClicked
-        if (!tela_materia.isVisible()) {
-            tela_materia.setVisible(true);
-        }
+//        if (!tela_materia.isVisible()) {
+//            tela_materia.setVisible(true);
+//        }
+        TelaCadMaterias tela = new TelaCadMaterias(telaPrinc, true);
+        tela.setVisible(true);
     }//GEN-LAST:event_lblBTCadMateriaMouseClicked
 
     private void lblBTCadPerguntaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBTCadPerguntaMouseClicked

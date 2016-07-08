@@ -345,8 +345,7 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
     }//GEN-LAST:event_lblCloseMouseMoved
 
     private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
-        telaCadPerguntas.dispose();     
-        
+        telaCadPerguntas.dispose();             
     }//GEN-LAST:event_lblCloseMouseClicked
 
     private void lblCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseExited

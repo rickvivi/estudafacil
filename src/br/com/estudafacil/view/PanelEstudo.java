@@ -19,8 +19,9 @@ import javax.swing.JOptionPane;
  *
  * @author Rick-Note
  */
-public class BannerEstudo extends javax.swing.JPanel {
+public class PanelEstudo extends javax.swing.JPanel {
 
+    TelaEstudo telaEstudo;
     TelaPrincipal telaprinc;
     BufferedImage img, img2;
     
@@ -30,8 +31,9 @@ public class BannerEstudo extends javax.swing.JPanel {
      */
     private String materia, periodo;
 
-    public BannerEstudo(TelaPrincipal telaPrincipal, String mat, String prd) {
+    public PanelEstudo(TelaEstudo telaEst, TelaPrincipal telaPrincipal, String mat, String prd) {
         
+        this.telaEstudo = telaEst;
         this.telaprinc = telaPrincipal;
         this.periodo = prd;
         this.materia = mat;
@@ -40,7 +42,7 @@ public class BannerEstudo extends javax.swing.JPanel {
             this.img = ImageIO.read(new File("src/botoes/fundo_topo.png"));
             this.img2 = ImageIO.read(new File("src/botoes/pergunta.jpeg"));
         } catch (IOException ex) {
-            Logger.getLogger(BannerEstudo.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelEstudo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         initComponents();
@@ -91,7 +93,7 @@ public class BannerEstudo extends javax.swing.JPanel {
 
         lblTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/estudando.png"))); // NOI18N
 
-        lblMateriaSelecionada.setFont(new java.awt.Font("Arial Rounded MT Bold", 1, 36)); // NOI18N
+        lblMateriaSelecionada.setFont(new java.awt.Font("Arial Rounded MT Bold", 3, 36)); // NOI18N
         lblMateriaSelecionada.setForeground(new java.awt.Color(255, 255, 255));
         lblMateriaSelecionada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
@@ -133,12 +135,7 @@ public class BannerEstudo extends javax.swing.JPanel {
              * ESSE MÉTODO FINALIZA O FRAME TELACADASTRO
              */
 
-            Container c = this.getParent();
-            while (!(c instanceof javax.swing.JFrame)) {
-                c = c.getParent();
-            }
-
-            ((javax.swing.JFrame) c).dispose();
+            telaEstudo.dispose();
             
             // REINICIALIZA A TELA PRINCIPAL JÁ INSTANCIADA
             telaprinc.setVisible(true);

@@ -20,18 +20,21 @@ import javax.imageio.ImageIO;
  *
  * @author Rick-Note
  */
-public class BannerCadMaterias extends javax.swing.JPanel {
+public class PanelCadMaterias extends javax.swing.JPanel {
+    
+    TelaCadMaterias telaCadMaterias;
 
     BufferedImage imagem;
     PanelCadMateriaSalva painelSalva = new PanelCadMateriaSalva();
 
-    public BannerCadMaterias() {
+    public PanelCadMaterias(TelaCadMaterias telaCad) {
+        this.telaCadMaterias = telaCad;
         initComponents();
 
         try {
             this.imagem = ImageIO.read(new File("src/botoes/tela_cad_materias.png"));
         } catch (IOException ex) {
-            Logger.getLogger(BannerCadMaterias.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PanelCadMaterias.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         rgbBtn.add(rbCad);
@@ -161,15 +164,17 @@ public class BannerCadMaterias extends javax.swing.JPanel {
 
     private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
 
-        /**
-         * ESSE MÉTODO FINALIZA O FRAME TELACADASTRO
-         */
-        Container c = this.getParent();
-        while (!(c instanceof javax.swing.JFrame)) {
-            c = c.getParent();
-        }
-
-        ((javax.swing.JFrame) c).dispose();
+        telaCadMaterias.dispose();
+        
+//        /**
+//         * ESSE MÉTODO FINALIZA O FRAME TELACADASTRO
+//         */
+//        Container c = this.getParent();
+//        while (!(c instanceof javax.swing.JFrame)) {
+//            c = c.getParent();
+//        }
+//
+//        ((javax.swing.JFrame) c).dispose();
 
     }//GEN-LAST:event_lblCloseMouseClicked
 

@@ -38,6 +38,7 @@ public class TelaEscolhaEstudo extends javax.swing.JDialog {
         setMaximumSize(new java.awt.Dimension(397, 198));
         setMinimumSize(new java.awt.Dimension(397, 198));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(397, 198));
 
         pnPrincipal.setLayout(new java.awt.BorderLayout());
 

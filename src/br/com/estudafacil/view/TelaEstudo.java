@@ -25,7 +25,7 @@ public class TelaEstudo extends javax.swing.JFrame {
         
        
         this.telaPrinc = telaPrincipal;
-        BannerEstudo panelEstudo = new BannerEstudo(telaPrinc, materia, periodo);
+        PanelEstudo panelEstudo = new PanelEstudo(this ,telaPrinc, materia, periodo);
         
         this.pnPrincipal.add(panelEstudo);
         
