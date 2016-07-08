@@ -19,7 +19,7 @@ public class TelaEscolhaEstudo extends javax.swing.JDialog {
         this.telaPrinc = telaPrincipal;
         initComponents();
         
-        PanelEscolhaEstuda painel = new PanelEscolhaEstuda(telaPrinc);
+        PanelEscolhaEstuda painel = new PanelEscolhaEstuda(telaPrinc, this);
         pnPrincipal.add(painel);
     }
 

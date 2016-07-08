@@ -25,14 +25,16 @@ import javax.swing.JOptionPane;
 public class PanelEscolhaEstuda extends javax.swing.JPanel {
 
     TelaPrincipal telaPrinc;
+    TelaEscolhaEstudo telaEscolhaEstudo;
 
     BufferedImage fundoEscolhaEstuda;
 
     ArrayList<Materias> lista = new ArrayList<>();
     MateriasDAO dao = new MateriasDAO();
 
-    public PanelEscolhaEstuda(TelaPrincipal telaPrincipal) {
+    public PanelEscolhaEstuda(TelaPrincipal telaPrincipal, TelaEscolhaEstudo telaEscolha) {
 
+        this.telaEscolhaEstudo = telaEscolha;
         this.telaPrinc = telaPrincipal;
 
         initComponents();
@@ -40,11 +42,11 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
         rbPeriodo.add(rbPrimeiro);
         rbPeriodo.add(rbSegundo);
         rbPeriodo.add(rbTotal);
-        
+
         rbPrimeiro.setActionCommand("primeiro");
         rbSegundo.setActionCommand("segundo");
         rbTotal.setActionCommand("total");
-        
+
         try {
             this.fundoEscolhaEstuda = ImageIO.read(new File("src/botoes/fundo_escolha_estuda.jpg"));
         } catch (IOException ex) {
@@ -206,15 +208,7 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
 
     private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
 
-        /**
-         * ESSE MÉTODO FINALIZA O FRAME TELACADASTRO
-         */
-        Container c = this.getParent();
-        while (!(c instanceof javax.swing.JFrame)) {
-            c = c.getParent();
-        }
-
-        ((javax.swing.JFrame) c).dispose();
+        telaEscolhaEstudo.dispose();
 
     }//GEN-LAST:event_lblCloseMouseClicked
 
@@ -232,30 +226,22 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
 
-        if(jcbListaMaterias.getSelectedIndex() == 0){
+        if (jcbListaMaterias.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(null, "Escolha a Matéria que deseja estudar.");
-        } else if(!rbPrimeiro.isSelected() && !rbSegundo.isSelected() && !rbTotal.isSelected()){
+        } else if (!rbPrimeiro.isSelected() && !rbSegundo.isSelected() && !rbTotal.isSelected()) {
             JOptionPane.showMessageDialog(null, "Escolha o Perído que deseja estudar!");
         } else {
-            /**
-         * ESSE MÉTODO FINALIZA O FRAME TELACADASTRO
-         */
-        Container c = this.getParent();
-        while (!(c instanceof javax.swing.JFrame)) {
-            c = c.getParent();
-        }
+            
+            telaEscolhaEstudo.dispose();
+            this.telaPrinc.dispose();
 
-        ((javax.swing.JFrame) c).dispose();
-        
-        this.telaPrinc.dispose();
-        
-        String mat = (String) jcbListaMaterias.getSelectedItem();
-        String prd = rbPeriodo.getSelection().getActionCommand();
-        
-        TelaEstudo telaEstudo = new TelaEstudo(telaPrinc, mat, prd);
-        telaEstudo.setVisible(true);
-        
-        } 
+            String mat = (String) jcbListaMaterias.getSelectedItem();
+            String prd = rbPeriodo.getSelection().getActionCommand();
+
+            TelaEstudo telaEstudo = new TelaEstudo(telaPrinc, mat, prd);
+            telaEstudo.setVisible(true);
+
+        }
     }//GEN-LAST:event_btnOKActionPerformed
 
 
