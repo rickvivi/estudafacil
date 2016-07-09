@@ -63,12 +63,21 @@ public class PanelEstudo extends javax.swing.JPanel {
         lblClose = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
         lblMateriaSelecionada = new javax.swing.JLabel();
+        lblPergunta = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtPergunta = new javax.swing.JTextPane();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        txtResposta = new javax.swing.JTextPane();
+        lblRespCorreta = new javax.swing.JLabel();
+        lblResposta = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtRespCorreta = new javax.swing.JTextPane();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        setMaximumSize(new java.awt.Dimension(925, 560));
-        setMinimumSize(new java.awt.Dimension(925, 560));
-        setPreferredSize(new java.awt.Dimension(925, 560));
+        setMaximumSize(new java.awt.Dimension(971, 600));
+        setMinimumSize(new java.awt.Dimension(971, 600));
+        setPreferredSize(new java.awt.Dimension(971, 600));
 
         lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/close_normal.png"))); // NOI18N
         lblClose.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -97,29 +106,86 @@ public class PanelEstudo extends javax.swing.JPanel {
         lblMateriaSelecionada.setForeground(new java.awt.Color(255, 255, 255));
         lblMateriaSelecionada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        lblPergunta.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        lblPergunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/lblPergunta.png"))); // NOI18N
+        lblPergunta.setText(" ");
+
+        txtPergunta.setEditable(false);
+        txtPergunta.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 153, 255), new java.awt.Color(0, 0, 255)), null));
+        txtPergunta.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jScrollPane4.setViewportView(txtPergunta);
+
+        txtResposta.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 153, 255), new java.awt.Color(0, 0, 255)), null));
+        txtResposta.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtResposta.setForeground(new java.awt.Color(0, 0, 204));
+        jScrollPane5.setViewportView(txtResposta);
+
+        lblRespCorreta.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblRespCorreta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRespCorreta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/lblRespCorreta.png"))); // NOI18N
+        lblRespCorreta.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+
+        lblResposta.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        lblResposta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/lblResponda.png"))); // NOI18N
+
+        txtRespCorreta.setEditable(false);
+        txtRespCorreta.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        txtRespCorreta.setForeground(new java.awt.Color(0, 102, 0));
+        jScrollPane3.setViewportView(txtRespCorreta);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(lblTitulo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblMateriaSelecionada, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblResposta)
+                            .addComponent(lblPergunta))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMateriaSelecionada, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblTitulo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lblClose, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(183, 183, 183)
+                        .addComponent(lblRespCorreta))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 898, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblClose)
-                .addContainerGap(508, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(lblMateriaSelecionada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblMateriaSelecionada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblClose)))
+                .addGap(8, 8, 8)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblResposta)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblRespCorreta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                .addGap(24, 24, 24))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -157,8 +223,17 @@ public class PanelEstudo extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblMateriaSelecionada;
+    private javax.swing.JLabel lblPergunta;
+    private javax.swing.JLabel lblRespCorreta;
+    private javax.swing.JLabel lblResposta;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JTextPane txtPergunta;
+    private javax.swing.JTextPane txtRespCorreta;
+    private javax.swing.JTextPane txtResposta;
     // End of variables declaration//GEN-END:variables
 }

@@ -40,12 +40,14 @@ public class TelaEstudo extends javax.swing.JFrame {
         pnPrincipal = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(925, 560));
-        setMinimumSize(new java.awt.Dimension(925, 560));
+        setMaximumSize(new java.awt.Dimension(971, 600));
+        setMinimumSize(new java.awt.Dimension(971, 600));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(971, 600));
 
-        pnPrincipal.setMaximumSize(new java.awt.Dimension(925, 560));
-        pnPrincipal.setMinimumSize(new java.awt.Dimension(925, 560));
+        pnPrincipal.setMaximumSize(new java.awt.Dimension(971, 600));
+        pnPrincipal.setMinimumSize(new java.awt.Dimension(971, 600));
+        pnPrincipal.setPreferredSize(new java.awt.Dimension(971, 600));
         pnPrincipal.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
