@@ -146,6 +146,48 @@ public class PerguntasDAO {
         return lista;
     }
     
+    public ArrayList<Perguntas> carregaListaEstudoBimestre(Integer materia, Integer periodo) {
+
+        ArrayList<Perguntas> lista = new ArrayList<>();
+        ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
+        con.conectaBD();
+        String sql = "select * from ask where id_materia = "+ materia +" and id_periodo = " + periodo + " ;";
+
+        try (PreparedStatement stmt = con.getConnection().prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Perguntas obj = new Perguntas(rs.getInt("id"), rs.getInt("id_materia"), rs.getInt("id_periodo"), rs.getString("pergunta"), rs.getString("resposta"));
+                lista.add(obj);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PerguntasDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+    
+    
+    public ArrayList<Perguntas> carregaListaEstudoSemestre(Integer materia) {
+
+        ArrayList<Perguntas> lista = new ArrayList<>();
+        ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
+        con.conectaBD();
+        String sql = "select * from ask where id_materia = "+ materia +" ;";
+
+        try (PreparedStatement stmt = con.getConnection().prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Perguntas obj = new Perguntas(rs.getInt("id"), rs.getInt("id_materia"), rs.getInt("id_periodo"), rs.getString("pergunta"), rs.getString("resposta"));
+                lista.add(obj);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PerguntasDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
     
 
 }

@@ -5,6 +5,9 @@
  */
 package br.com.estudafacil.view;
 
+import br.com.estudafacil.model.Perguntas;
+import java.util.ArrayList;
+
 /**
  *
  * @author Rick-Note
@@ -15,22 +18,21 @@ public class TelaEstudo extends javax.swing.JFrame {
     
     //VARÍAVEIS PARA RECEBER PARAMETROS DA MATERIA SELECIONADA
     private PanelEscolhaEstuda pnEscEst;
-    private String materia, periodo;
+    private String materia;
+    private ArrayList<Perguntas> lista;
    
-    public TelaEstudo(TelaPrincipal telaPrincipal, String mat, String prd) {
+    public TelaEstudo(TelaPrincipal telaPrincipal, String mat, ArrayList<Perguntas> list) {
         this.materia = mat;
-        this.periodo = prd;
+        this.lista = list;
         
         initComponents();
         
        
         this.telaPrinc = telaPrincipal;
-        PanelEstudo panelEstudo = new PanelEstudo(this ,telaPrinc, materia, periodo);
+        PanelEstudo panelEstudo = new PanelEstudo(this ,telaPrinc, materia, lista);
         
         this.pnPrincipal.add(panelEstudo);
-        
-        System.out.println(materia + "  -  " + periodo);
-
+       
     }
     
     @SuppressWarnings("unchecked")
@@ -43,7 +45,6 @@ public class TelaEstudo extends javax.swing.JFrame {
         setMaximumSize(new java.awt.Dimension(971, 600));
         setMinimumSize(new java.awt.Dimension(971, 600));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(971, 600));
 
         pnPrincipal.setMaximumSize(new java.awt.Dimension(971, 600));
         pnPrincipal.setMinimumSize(new java.awt.Dimension(971, 600));

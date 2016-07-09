@@ -5,39 +5,42 @@
  */
 package br.com.estudafacil.view;
 
+import br.com.estudafacil.model.Perguntas;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Rick-Note
- */
 public class PanelEstudo extends javax.swing.JPanel {
 
     TelaEstudo telaEstudo;
     TelaPrincipal telaprinc;
     BufferedImage img, img2;
-    
-    /**
-     * VARIÁVEIS PARA RECEBER OS PARÂMETROS DA MATÉRIA A SER 
-     *  ESTUDADA.
-     */
-    private String materia, periodo;
 
-    public PanelEstudo(TelaEstudo telaEst, TelaPrincipal telaPrincipal, String mat, String prd) {
+    /**
+     * VARIÁVEIS PARA RECEBER OS PARÂMETROS DA MATÉRIA A SER ESTUDADA.
+     */
+    private String materia;
+    private ArrayList<Perguntas> lista;
+
+    /**
+     * VARIÁVEIS NECESSÁRIAS PARA O JOGO DO ESTUDO
+     */
         
+    public PanelEstudo(TelaEstudo telaEst, TelaPrincipal telaPrincipal, String mat, ArrayList<Perguntas> list) {
+        this.lista = list;
         this.telaEstudo = telaEst;
         this.telaprinc = telaPrincipal;
-        this.periodo = prd;
         this.materia = mat;
-        
+
         try {
             this.img = ImageIO.read(new File("src/botoes/fundo_topo.png"));
             this.img2 = ImageIO.read(new File("src/botoes/pergunta.jpeg"));
@@ -46,16 +49,16 @@ public class PanelEstudo extends javax.swing.JPanel {
         }
 
         initComponents();
-        
+
         lblMateriaSelecionada.setText(materia);
     }
-    
-    public void paintComponent(Graphics g){
+
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(img, 0, 0, this);
         g.drawImage(img2, 795, 335, this);
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -72,6 +75,7 @@ public class PanelEstudo extends javax.swing.JPanel {
         lblResposta = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtRespCorreta = new javax.swing.JTextPane();
+        btnConfere = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -133,6 +137,13 @@ public class PanelEstudo extends javax.swing.JPanel {
         txtRespCorreta.setForeground(new java.awt.Color(0, 102, 0));
         jScrollPane3.setViewportView(txtRespCorreta);
 
+        btnConfere.setText("Confere");
+        btnConfere.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfereActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -155,7 +166,9 @@ public class PanelEstudo extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(183, 183, 183)
-                        .addComponent(lblRespCorreta))
+                        .addComponent(lblRespCorreta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnConfere, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane5)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
                     .addComponent(jScrollPane4))
@@ -181,7 +194,9 @@ public class PanelEstudo extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblRespCorreta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnConfere, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblRespCorreta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                 .addGap(24, 24, 24))
@@ -201,7 +216,7 @@ public class PanelEstudo extends javax.swing.JPanel {
              */
 
             telaEstudo.dispose();
-            
+
             // REINICIALIZA A TELA PRINCIPAL JÁ INSTANCIADA
             telaprinc.setVisible(true);
         }
@@ -220,8 +235,16 @@ public class PanelEstudo extends javax.swing.JPanel {
         lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/close_normal.png")));
     }//GEN-LAST:event_lblCloseMouseReleased
 
+    private void btnConfereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfereActionPerformed
+        for (Perguntas x : lista){
+               System.out.println("Matéria - " + x.getId_materia() + " Periodo - " + x.getPeriodo() + " Pergunta - " + x.getPergunta());
+        }
+
+    }//GEN-LAST:event_btnConfereActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConfere;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
