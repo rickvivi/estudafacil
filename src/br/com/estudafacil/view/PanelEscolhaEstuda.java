@@ -232,50 +232,50 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Escolha a Matéria que deseja estudar.");
         } else if (!rbPrimeiro.isSelected() && !rbSegundo.isSelected() && !rbTotal.isSelected()) {
             JOptionPane.showMessageDialog(null, "Escolha o Perído que deseja estudar!");
-        } else {            
+        } else {
             /**
              * Lista de objetos para capturar materia e periodo
-             */            
+             */
             ArrayList<Perguntas> lista = new ArrayList<Perguntas>();
             PerguntasDAO objAskDAO = new PerguntasDAO();
             MateriasDAO matDAO = new MateriasDAO();
             Perguntas objAsk = new Perguntas();
-            
+
             // VARIAVEIS PARA RECEBER MATERIA PERIODO
             String mat = (String) jcbListaMaterias.getSelectedItem();
             String prd = rbPeriodo.getSelection().getActionCommand();
             int periodo = 0;
-            
+
             // VERFICA QUAL PERIODO ESCOLHIDO
-            if (prd.equals("primeiro")){
+            if (prd.equals("primeiro")) {
                 periodo = 0;
             } else if (prd.equals("segundo")) {
                 periodo = 1;
             } else {
                 periodo = 3;
             }
-            
+
             //ADICIONA A MATERIA E O PERIODO AO OBJETO 
             objAsk.setId_materia(matDAO.capturaID(mat));
             objAsk.setPeriodo(periodo);
-           
-           // VERIFICA SE O PERIODO É PRIMEIRO, SEGUNDO BIMESTRE OU SEMESTRAL E CARREGA A LISTA
-            if (periodo == 3){
+
+            // VERIFICA SE O PERIODO É PRIMEIRO, SEGUNDO BIMESTRE OU SEMESTRAL E CARREGA A LISTA
+            if (periodo == 3) {
                 lista = objAskDAO.carregaListaEstudoSemestre(objAsk.getId_materia());
             } else {
                 lista = objAskDAO.carregaListaEstudoBimestre(objAsk.getId_materia(), objAsk.getPeriodo());
             }
-            
-//            for (Perguntas x : lista){
-//                System.out.println("Matéria - " + x.getId_materia() + " Periodo - " + x.getPeriodo() + " Pergunta - " +x.getPergunta());
-//            }
-            
-            telaEscolhaEstudo.dispose();
-            this.telaPrinc.dispose();
 
-            TelaEstudo telaEstudo = new TelaEstudo(telaPrinc, mat, lista);
-            telaEstudo.setVisible(true);
+            if (lista.size() == 0) {
+                JOptionPane.showMessageDialog(null, "A Matéria selecionada não possui questões cadastradas no período selecionado. \n"
+                        + "Por favor escolha outra alternativa, ou cadastre novas questões no período desejado.", "ATENÇÃO!", HEIGHT);
+            } else {
+                telaEscolhaEstudo.dispose();
+                this.telaPrinc.dispose();
 
+                TelaEstudo telaEstudo = new TelaEstudo(telaPrinc, mat, periodo, lista);
+                telaEstudo.setVisible(true);
+            }
         }
     }//GEN-LAST:event_btnOKActionPerformed
 

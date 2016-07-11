@@ -29,17 +29,31 @@ public class PanelEstudo extends javax.swing.JPanel {
      * VARIÁVEIS PARA RECEBER OS PARÂMETROS DA MATÉRIA A SER ESTUDADA.
      */
     private String materia;
+    private int periodo;
     private ArrayList<Perguntas> lista;
+    private ArrayList<Perguntas> listaBkp = new ArrayList<>();
+    private String prdSelecionado;
 
     /**
      * VARIÁVEIS NECESSÁRIAS PARA O JOGO DO ESTUDO
      */
-        
-    public PanelEstudo(TelaEstudo telaEst, TelaPrincipal telaPrincipal, String mat, ArrayList<Perguntas> list) {
+    private ArrayList<Perguntas> listaErros = new ArrayList<>();
+    private int indicePerguntas = 0;  // ÍNDICE PARA PERCORRER A LISTA DE PERGUNTAS
+    private int respCertas = 0; // SOMATÓRIA DAS RESPOSTAS CERTAS
+    private int respErradas = 0; // SOMATÓRIA DAS RESPOSTAS ERRADAS
+    private String periodoSelecionado; // EXIBE PERIODO
+    private boolean btConfere = true; // VARÍAVEL DO BOTÃO - CONFERE / PROXIMO
+    private boolean isLast = false; // VARIÁVEL PARA ULTIMA PERGUNTA
+
+    private int totalPerguntas = 0;
+    private int indexAsk = 0;
+
+    public PanelEstudo(TelaEstudo telaEst, TelaPrincipal telaPrincipal, String mat, int prd, ArrayList<Perguntas> list) {
         this.lista = list;
         this.telaEstudo = telaEst;
         this.telaprinc = telaPrincipal;
         this.materia = mat;
+        this.periodo = prd;
 
         try {
             this.img = ImageIO.read(new File("src/botoes/fundo_topo.png"));
@@ -50,7 +64,35 @@ public class PanelEstudo extends javax.swing.JPanel {
 
         initComponents();
 
-        lblMateriaSelecionada.setText(materia);
+        lblMateriaSelecionada.setText(materia); // EXIBE A MATERIA SELECIONADA NO PAINEL
+        // EXIBE O PERIODO SELECIONADO NO PAINEL
+        if (periodo == 0) {
+            periodoSelecionado = "Conteúdo do 1º Bimestre";
+        } else if (periodo == 1) {
+            periodoSelecionado = "Conteúdo do 2º Bimestre";
+        } else {
+            periodoSelecionado = "Conteúdo do Semestre";
+        }
+        lblPeriodoSelecionado.setText(periodoSelecionado);
+
+        // FAZ UM SORT NA LISTA DE PERGUNTAS PARA APRESENTAR ALTERNADAMENTE
+        Collections.shuffle(lista);
+
+        // COLOCA A PRIMEIRA PERGUNTA PARA SER RESPONDIDA E INICIALIZA RESP. CERTAS E ERRADAS
+        txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
+        lblCertas.setText(Integer.toString(respCertas));
+        lblErradas.setText(Integer.toString(respErradas));
+
+        // FAZ O BACKUP DA LISTA COMPLETA PARA O CASO DE POSTERIORMENTE SEJA
+        // NECESSÁRIO ESTUDAR A LISTA NOVAMENTE.
+        for (Perguntas x : lista) {
+            listaBkp.add(x);
+        }
+
+        // ATRIBUI O TOTAL DE PERGUNTAS A VARIAVEL E EXIBE NA TELA
+        totalPerguntas = lista.size();
+        lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
+
     }
 
     public void paintComponent(Graphics g) {
@@ -75,7 +117,13 @@ public class PanelEstudo extends javax.swing.JPanel {
         lblResposta = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtRespCorreta = new javax.swing.JTextPane();
-        btnConfere = new javax.swing.JButton();
+        lblPeriodoSelecionado = new javax.swing.JLabel();
+        lblCertas = new javax.swing.JLabel();
+        lblIconCertas = new javax.swing.JLabel();
+        lblIconErradas = new javax.swing.JLabel();
+        lblErradas = new javax.swing.JLabel();
+        lblQuantidade = new javax.swing.JLabel();
+        lblBtnConfere = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -109,6 +157,7 @@ public class PanelEstudo extends javax.swing.JPanel {
         lblMateriaSelecionada.setFont(new java.awt.Font("Arial Rounded MT Bold", 3, 36)); // NOI18N
         lblMateriaSelecionada.setForeground(new java.awt.Color(255, 255, 255));
         lblMateriaSelecionada.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMateriaSelecionada.setText("Engenharia de Software");
 
         lblPergunta.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         lblPergunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/lblPergunta.png"))); // NOI18N
@@ -137,10 +186,44 @@ public class PanelEstudo extends javax.swing.JPanel {
         txtRespCorreta.setForeground(new java.awt.Color(0, 102, 0));
         jScrollPane3.setViewportView(txtRespCorreta);
 
-        btnConfere.setText("Confere");
-        btnConfere.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnConfereActionPerformed(evt);
+        lblPeriodoSelecionado.setFont(new java.awt.Font("Arial Rounded MT Bold", 3, 24)); // NOI18N
+        lblPeriodoSelecionado.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblPeriodoSelecionado.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        lblCertas.setFont(new java.awt.Font("Tempus Sans ITC", 1, 24)); // NOI18N
+
+        lblIconCertas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIconCertas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/certo1.png"))); // NOI18N
+        lblIconCertas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        lblIconErradas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIconErradas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/errado1.png"))); // NOI18N
+        lblIconErradas.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        lblErradas.setFont(new java.awt.Font("Tempus Sans ITC", 1, 24)); // NOI18N
+
+        lblQuantidade.setFont(new java.awt.Font("Tempus Sans ITC", 1, 22)); // NOI18N
+        lblQuantidade.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        lblBtnConfere.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblBtnConfere.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/btConfere.png"))); // NOI18N
+        lblBtnConfere.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                lblBtnConfereMouseMoved(evt);
+            }
+        });
+        lblBtnConfere.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblBtnConfereMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblBtnConfereMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                lblBtnConfereMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                lblBtnConfereMouseReleased(evt);
             }
         });
 
@@ -149,6 +232,22 @@ public class PanelEstudo extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(lblTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblClose, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblIconCertas, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblIconErradas, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblErradas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCertas, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53))))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(210, 210, 210)
@@ -156,23 +255,26 @@ public class PanelEstudo extends javax.swing.JPanel {
                             .addComponent(lblResposta)
                             .addComponent(lblPergunta))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblMateriaSelecionada, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblTitulo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
-                .addComponent(lblClose, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblMateriaSelecionada, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPeriodoSelecionado, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 92, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(lblRespCorreta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnConfere, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane5)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4))
-                .addGap(0, 204, Short.MAX_VALUE))
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane5)
+                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(lblQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblRespCorreta)
+                                .addGap(204, 204, 204)
+                                .addComponent(lblBtnConfere, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(185, 185, 185)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -183,23 +285,35 @@ public class PanelEstudo extends javax.swing.JPanel {
                             .addComponent(lblMateriaSelecionada, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPergunta, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblPeriodoSelecionado, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblClose)))
                 .addGap(8, 8, 8)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lblCertas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblIconCertas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblResposta)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblIconErradas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblResposta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblErradas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnConfere, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblBtnConfere, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblRespCorreta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                .addGap(24, 24, 24))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -235,22 +349,196 @@ public class PanelEstudo extends javax.swing.JPanel {
         lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/close_normal.png")));
     }//GEN-LAST:event_lblCloseMouseReleased
 
-    private void btnConfereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfereActionPerformed
-        for (Perguntas x : lista){
-               System.out.println("Matéria - " + x.getId_materia() + " Periodo - " + x.getPeriodo() + " Pergunta - " + x.getPergunta());
+    /**
+     * FUNÇÕES DO BOTÃO CONFERE, IMPLEMENTAÇÃO DAS IMAGENS DO BOTÃO
+     */
+    private void lblBtnConfereMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnConfereMouseMoved
+        if (btConfere) {
+            lblBtnConfere.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/btConfereMouse.png")));
+        } else {
+            lblBtnConfere.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/btProximaMouse.png")));
         }
+    }//GEN-LAST:event_lblBtnConfereMouseMoved
 
-    }//GEN-LAST:event_btnConfereActionPerformed
+    private void lblBtnConfereMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnConfereMouseExited
+        if (btConfere) {
+            lblBtnConfere.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/btConfere.png")));
+        } else {
+            lblBtnConfere.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/btProxima.png")));
+        }
+    }//GEN-LAST:event_lblBtnConfereMouseExited
+
+    private void lblBtnConfereMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnConfereMousePressed
+        if (btConfere) {
+            lblBtnConfere.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/btConferePressed.png")));
+        } else {
+            lblBtnConfere.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/btProximaPressed.png")));
+        }
+    }//GEN-LAST:event_lblBtnConfereMousePressed
+
+    private void lblBtnConfereMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnConfereMouseReleased
+        if (btConfere) {
+            lblBtnConfere.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/btProximaMouse.png")));
+        } else {
+            lblBtnConfere.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/btConfereMouse.png")));
+        }
+    }//GEN-LAST:event_lblBtnConfereMouseReleased
+
+    /**
+     * IMPLEMENTAÇÃO DAS FUNÇÕES DO BOTÃO CONFERE
+     */
+    private void lblBtnConfereMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnConfereMouseClicked
+        if (btConfere) {
+            /**
+             * VERIFICA SE ESTÁ NO ÚLTIMO INDICE DA LISTA E FAZ A ÚTIMA ETAPA
+             * PERGUNTANDO SE DESEJA NO FINAL TREINAR AS RESPOSTAS ERRADAS.
+             */
+            if (lista.size() == 1) {
+                // APRESENTA A RESPOSTA CORRETA
+                txtRespCorreta.setText(lista.get(indicePerguntas).getResposta());
+
+                // JANELA DE CONFIRMAÇÃO SE A RESPOSTA FOI ACERTADA OU ERRADA
+                int resposta = JOptionPane.showConfirmDialog(null, "Você acertou a resposta?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
+                if (resposta == JOptionPane.YES_OPTION) {
+                    lblCertas.setText(Integer.toString(++respCertas));
+                } else {
+                    lblErradas.setText(Integer.toString(++respErradas));
+                    listaErros.add(lista.get(indicePerguntas));     // ADICIONA QUESTÃO ERRADA NA LISTA DE RESPOSTAS ERRADAS
+                }
+                lista.remove(indicePerguntas); // REMOVE A PERGUNTA DA LISTA DEPOIS DE RESPONDIDA
+                isLast = true; // MARCA ESTA PERGUNTA COMO SENDO A ULTIMA.
+            } else if (lista.size() > 1) {
+                /**
+                 * SE NÃO FOR O ULTIMO INDICE DA LISTA FAZ O PROCESSO NORMAL
+                 * PASSANDO DE INDICE EM INDICE.
+                 */
+                // APRESENTA A RESPOSTA CORRETA
+                txtRespCorreta.setText(lista.get(indicePerguntas).getResposta());
+
+                // JANELA DE CONFIRMAÇÃO SE A RESPOSTA FOI ACERTADA OU ERRADA
+                int resposta = JOptionPane.showConfirmDialog(null, "Você acertou a resposta?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
+                if (resposta == JOptionPane.YES_OPTION) {
+                    lblCertas.setText(Integer.toString(++respCertas));
+                } else {
+                    lblErradas.setText(Integer.toString(++respErradas));
+                    listaErros.add(lista.get(indicePerguntas));     // ADICIONA QUESTÃO ERRADA NA LISTA DE RESPOSTAS ERRADAS
+                }
+                // REMOVE A PERGUNTA DA LISTA DEPOIS DE RESPONDIDA
+                lista.remove(indicePerguntas);
+
+            }
+
+            // MUDA A FUNCIONALIDADE DO BOTÃO
+            btConfere = false;
+
+        } else if (isLast) {
+            // VERIFICA SE A LISTA DE PERGUNTAS ESTÁ VAZIA
+            if (listaErros.size() == 0) {
+                int resposta = JOptionPane.showConfirmDialog(null, "O Estudo Terminou... Deseja Estudar ("
+                        + materia + " - " + periodoSelecionado + ") Novamente?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
+                if (resposta == JOptionPane.YES_OPTION) {
+                    indexAsk = 0;
+                    totalPerguntas = listaBkp.size();
+                    lista.clear();
+                    for (Perguntas x : listaBkp) {
+                        lista.add(x);
+                    }
+                    Collections.shuffle(lista);
+
+                    // ZERA TODOS OS INDICES PARA REINICIAR O ESTUDO
+                    indicePerguntas = 0;
+                    respCertas = 0;
+                    respErradas = 0;
+                    lblCertas.setText(Integer.toString(respCertas));
+                    lblErradas.setText(Integer.toString(respErradas));
+
+                    //ZERA OS CAMPOS E PASSA PARA PROXIMA PERGUNTA.
+                    lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
+                    txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
+                    txtResposta.setText("");
+                    txtRespCorreta.setText("");
+                    txtResposta.requestFocus();
+
+                    // MUDA A FUNCIONALIDADE DO BOTÃO
+                    btConfere = true;
+
+                } else {
+                    // AQUI, SE O USUARIO NAO DESEJA ESTUDAR MAIS A TELA É FINALIZADA.
+                    telaEstudo.dispose();
+                    telaprinc.setVisible(true);
+                }
+            } else {
+                /**
+                 * AQUI O JOGO DE PERGUNTAS JÁ TERMINOU,MAS AINDA EXISTEM ERROS
+                 * ENTÃO O PROGRAMA PERGUNTA SE O USUÁRIO DESEJA TREINAR APENAS
+                 * AS QUESTÕES QUE FORAM RESPONDIDAS ERRADAS.
+                 */
+                int resposta = JOptionPane.showConfirmDialog(null, "As questões terminaram. Deseja estudar apenas as "
+                        + "questões que você errou?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
+                if (resposta == JOptionPane.YES_OPTION) {
+                    // PASSA A LISTA DE ERRADAS PARA A LISTA DO JOGO E ZERA OS INDICES
+                    indexAsk = 0;
+                    totalPerguntas = listaErros.size();
+                    lista.clear();
+                    for (Perguntas x : listaErros) {
+                        lista.add(x);
+                    }
+                    listaErros.clear();
+                    Collections.shuffle(lista);
+                    indicePerguntas = 0;
+                    respCertas = 0;
+                    respErradas = 0;
+                    lblCertas.setText(Integer.toString(respCertas));
+                    lblErradas.setText(Integer.toString(respErradas));
+
+                    // ZERA OS CAMPOS E PASSA PARA A PROXIMA PERGUNTA
+                    lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
+                    txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
+                    txtResposta.setText("");
+                    txtRespCorreta.setText("");
+                    txtResposta.requestFocus();
+
+                    // MUDA A FUNCIONALIDADE DO BOTÃO
+                    btConfere = true;
+                } else {
+                    /**
+                     * AQUI SE A RESPOSTA FOR NÃO DESEJA ESTUDAR AS ERRADAS...
+                     * ENTÃO FECHA A TELA DE ESTUDOS.
+                     */
+                    telaEstudo.dispose();
+                    telaprinc.setVisible(true);
+                }
+
+            }
+            isLast = false;
+        } else {
+            // ZERA OS CAMPOS E PASSA PARA A PROXIMA PERGUNTA
+            txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
+            txtResposta.setText("");
+            txtRespCorreta.setText("");
+            txtResposta.requestFocus();
+            lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
+
+            // MUDA A FUNCIONALIDADE DO BOTÃO
+            btConfere = true;
+        }
+    }//GEN-LAST:event_lblBtnConfereMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnConfere;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JLabel lblBtnConfere;
+    private javax.swing.JLabel lblCertas;
     private javax.swing.JLabel lblClose;
+    private javax.swing.JLabel lblErradas;
+    private javax.swing.JLabel lblIconCertas;
+    private javax.swing.JLabel lblIconErradas;
     private javax.swing.JLabel lblMateriaSelecionada;
     private javax.swing.JLabel lblPergunta;
+    private javax.swing.JLabel lblPeriodoSelecionado;
+    private javax.swing.JLabel lblQuantidade;
     private javax.swing.JLabel lblRespCorreta;
     private javax.swing.JLabel lblResposta;
     private javax.swing.JLabel lblTitulo;

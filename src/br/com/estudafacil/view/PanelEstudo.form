@@ -35,37 +35,65 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lblClose" min="-2" pref="40" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblIconCertas" min="-2" pref="56" max="-2" attributes="0"/>
+                          <Component id="lblIconErradas" min="-2" pref="57" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblErradas" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="lblCertas" min="-2" pref="39" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+          </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="210" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblResposta" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="lblPergunta" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblMateriaSelecionada" min="-2" pref="527" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lblMateriaSelecionada" min="-2" pref="527" max="-2" attributes="0"/>
+                          <Component id="lblPeriodoSelecionado" min="-2" pref="337" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="92" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="lblTitulo" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="52" max="32767" attributes="0"/>
-              <Component id="lblClose" min="-2" pref="40" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="183" max="-2" attributes="0"/>
-                      <Component id="lblRespCorreta" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnConfere" min="-2" pref="143" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane3" alignment="0" pref="730" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="lblQuantidade" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="lblRespCorreta" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="204" max="-2" attributes="0"/>
+                              <Component id="lblBtnConfere" min="-2" pref="175" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="185" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                   </Group>
-                  <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
-                  <Component id="jScrollPane3" alignment="0" pref="730" max="32767" attributes="0"/>
-                  <Component id="jScrollPane4" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="204" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -79,27 +107,44 @@
                           <Component id="lblTitulo" min="-2" pref="56" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="lblPergunta" min="-2" pref="44" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblPergunta" min="-2" pref="44" max="-2" attributes="0"/>
+                          <Component id="lblPeriodoSelecionado" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="lblClose" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-              <Component id="jScrollPane4" min="-2" pref="110" max="-2" attributes="0"/>
+              <EmptySpace min="8" pref="8" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="jScrollPane4" min="-2" pref="110" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="lblQuantidade" min="-2" pref="46" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="lblCertas" alignment="1" max="32767" attributes="0"/>
+                          <Component id="lblIconCertas" alignment="1" pref="50" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="lblResposta" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblIconErradas" max="32767" attributes="0"/>
+                  <Component id="lblResposta" max="32767" attributes="0"/>
+                  <Component id="lblErradas" alignment="1" max="32767" attributes="0"/>
+              </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane5" min="-2" pref="118" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="btnConfere" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lblBtnConfere" min="-2" pref="53" max="-2" attributes="0"/>
                   <Component id="lblRespCorreta" min="-2" pref="40" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane3" pref="114" max="32767" attributes="0"/>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <Component id="jScrollPane3" min="-2" pref="114" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -135,6 +180,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="text" type="java.lang.String" value="Engenharia de Software"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblPergunta">
@@ -250,12 +296,68 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnConfere">
+    <Component class="javax.swing.JLabel" name="lblPeriodoSelecionado">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Confere"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Arial Rounded MT Bold" size="24" style="3"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="4"/>
+        <Property name="verticalAlignment" type="int" value="1"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblCertas">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tempus Sans ITC" size="24" style="1"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblIconCertas">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Botoes/certo1.png"/>
+        </Property>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblIconErradas">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Botoes/errado1.png"/>
+        </Property>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblErradas">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tempus Sans ITC" size="24" style="1"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblQuantidade">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tempus Sans ITC" size="22" style="1"/>
+        </Property>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblBtnConfere">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="0"/>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/Botoes/btConfere.png"/>
+        </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfereActionPerformed"/>
+        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="lblBtnConfereMouseMoved"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBtnConfereMouseClicked"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBtnConfereMouseExited"/>
+        <EventHandler event="mousePressed" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBtnConfereMousePressed"/>
+        <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblBtnConfereMouseReleased"/>
       </Events>
     </Component>
   </SubComponents>

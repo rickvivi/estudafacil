@@ -19,17 +19,19 @@ public class TelaEstudo extends javax.swing.JFrame {
     //VARÍAVEIS PARA RECEBER PARAMETROS DA MATERIA SELECIONADA
     private PanelEscolhaEstuda pnEscEst;
     private String materia;
+    private int periodo;
     private ArrayList<Perguntas> lista;
    
-    public TelaEstudo(TelaPrincipal telaPrincipal, String mat, ArrayList<Perguntas> list) {
+    public TelaEstudo(TelaPrincipal telaPrincipal, String mat, int prd, ArrayList<Perguntas> list) {
         this.materia = mat;
+        this.periodo = prd;
         this.lista = list;
         
         initComponents();
         
        
         this.telaPrinc = telaPrincipal;
-        PanelEstudo panelEstudo = new PanelEstudo(this ,telaPrinc, materia, lista);
+        PanelEstudo panelEstudo = new PanelEstudo(this ,telaPrinc, materia, periodo, lista);
         
         this.pnPrincipal.add(panelEstudo);
        
