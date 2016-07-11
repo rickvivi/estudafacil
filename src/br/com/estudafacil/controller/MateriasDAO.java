@@ -10,6 +10,7 @@ import br.com.estudafacil.model.Perguntas;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -113,15 +114,27 @@ public class MateriasDAO {
         return retorno;
     }
 
-    public void deletaMateria(String pergunta) {
+    public void deletaMateria(String materia) {
 
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
         con.conectaBD();
+        
+        /**
+         * PARA DELETAR A MATÉRIA É PRECISO PRIMEIRO DELETAR AS PERGUNTAS
+         * RELACIONADAS À ELA NA TABELA ASK. PRIMEIRO CAPTURAMOS A ID DA
+         * MATÉRIA, E DEPOIS DELETAMOS TODAS AS PERGUNTAS DA MATERIA
+         * SELECIONADA. E AÍ ENTÃO, DELETAMOS A MATÉRIA.
+         */
+        MateriasDAO matDAO = new MateriasDAO();
+        Integer id = matDAO.capturaID(materia); // CAPTURA O ID DA MATERIA SELECIONADA
 
-        String sql = "delete from materia where materia = '" + pergunta + "'";
+        
+        String sqlRemovePerguntas = "delete from ask where id_materia = "+id; // DELETA TODAS PERGUNTAS DA MATERIA
+        String sql = "delete from materia where materia = '" + materia + "'"; // DELETA A MATERIA
+        
 
         try (Statement stmt = con.getConnection().createStatement()) {
-
+            stmt.executeUpdate(sqlRemovePerguntas);
             stmt.executeUpdate(sql);
             stmt.execute("shutdown");
             JOptionPane.showMessageDialog(null, "Matéria Deletada com Sucesso!");
@@ -129,6 +142,6 @@ public class MateriasDAO {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro na Exclusão de dados." + ex);
             Logger.getLogger(PerguntasDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } 
     }
 }
