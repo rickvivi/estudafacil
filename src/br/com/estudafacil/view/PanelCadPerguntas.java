@@ -102,6 +102,11 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
         lblTitulo = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 153, 255), 1, true));
+        setMaximumSize(new java.awt.Dimension(949, 560));
+        setMinimumSize(new java.awt.Dimension(949, 560));
+        setPreferredSize(new java.awt.Dimension(949, 560));
+        setVerifyInputWhenFocusTarget(false);
 
         lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/close_normal.png"))); // NOI18N
         lblClose.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -288,7 +293,7 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 56, Short.MAX_VALUE))
+                .addGap(0, 54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,12 +303,10 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGravar, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(376, 376, 376)
-                        .addComponent(btnGravar))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -336,7 +339,7 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
                                 .addComponent(lblNext)))))
                 .addGap(5, 5, 5)
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(1, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

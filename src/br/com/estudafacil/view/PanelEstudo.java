@@ -85,9 +85,7 @@ public class PanelEstudo extends javax.swing.JPanel {
 
         // FAZ O BACKUP DA LISTA COMPLETA PARA O CASO DE POSTERIORMENTE SEJA
         // NECESSÁRIO ESTUDAR A LISTA NOVAMENTE.
-        for (Perguntas x : lista) {
-            listaBkp.add(x);
-        }
+        listaBkp = (ArrayList<Perguntas>) lista.clone();
 
         // ATRIBUI O TOTAL DE PERGUNTAS A VARIAVEL E EXIBE NA TELA
         totalPerguntas = lista.size();
