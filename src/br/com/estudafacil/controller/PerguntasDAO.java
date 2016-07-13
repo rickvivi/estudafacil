@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.estudafacil.controller;
 
 import br.com.estudafacil.model.Perguntas;
@@ -16,18 +11,22 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- * Classe DAO
- *
- * @author Rick-Note
- */
 public class PerguntasDAO {
 
-    public void insert(Integer id, Integer periodo, String pergunta, String resposta) {
+    /**
+     * METODO PARA GRAVAR NOVAS PERGUNTAS NO BANCO DE DADOS.
+     *
+     * @param id_mat - recebe o id da materia que deseja gravar à pergunta.
+     * @param periodo - recebe o id do periodo que deseja gravar à pergunta.
+     * @param pergunta - recebe a pergunta para gravar no banco de dados.
+     * @param resposta - recebe a resposta referente à pergunta para gravar no
+     * banco de dados.
+     */
+    public void insert(Integer id_mat, Integer periodo, String pergunta, String resposta) {
 
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
         con.conectaBD();
-        String sql = "insert into ask (id_materia, id_periodo, pergunta, resposta) values(" + id + ", " + periodo + ", '" + pergunta + "', '" + resposta + "');";
+        String sql = "insert into ask (id_materia, id_periodo, pergunta, resposta) values(" + id_mat + ", " + periodo + ", '" + pergunta + "', '" + resposta + "');";
 
         try (Statement stmt = con.getConnection().createStatement()) {
 
@@ -40,6 +39,12 @@ public class PerguntasDAO {
         }
     }
 
+    /**
+     * MÉTODO PARA ALTERAR DADOS DE QUESTÕES JÁ EXISTENTES NO BANCO DE DADOS
+     *
+     * @param obj - recebe um objeto do tipo 'Perguntas' com todos os dados
+     * necessários para alterar no banco de dados.
+     */
     public void update(Perguntas obj) {
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
         con.conectaBD();
@@ -56,6 +61,12 @@ public class PerguntasDAO {
         }
     }
 
+    /**
+     * MÉTODO PARA DELETAR A QUESTÃO DESEJADA
+     *
+     * @param pergunta - recebe um String como parâmetro com o nome da materia
+     * que deseja excluir
+     */
     public void delete(String pergunta) {
 
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
@@ -75,6 +86,13 @@ public class PerguntasDAO {
         }
     }
 
+    /**
+     * MÉTODO QUE RETORNA UMA PERGUNTA DESEJADA EM EXCLUSIVO
+     *
+     * @param pergunta - parametro String com a pergunta que deseja selecionar.
+     * @return - retorna uma String. ESTE MÉTODO É UTILIZADO PARA VERIFICAR SE A
+     * PERGUNTA EXISTE NO BD ANTES DE DELETAR.
+     */
     public String select(String pergunta) {
 
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
@@ -98,33 +116,11 @@ public class PerguntasDAO {
     }
 
     /**
-     * Carrega todas as palavras e respostas no Banco de Dados
+     * MÉTODO PARA PESQUISA. SELECIONA TODOS OS CAMPOS DE DADOS E SALVA EM UM
+     * OBJETO 'PERGUNTA'.
      *
-     * @return Retorna os dados obtidos em uma lista.
+     * @return - retorna uma lista array de Perguntas
      */
-//    public ArrayList<Perguntas> carregaLista() {
-//
-//        ArrayList<Perguntas> lista = new ArrayList<>();
-//        ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
-//        con.conectaBD();
-//        String sql = "select * from ask";
-//
-//        try (PreparedStatement stmt = con.getConnection().prepareStatement(sql)) {
-//            ResultSet rs = stmt.executeQuery();
-//
-//            while (rs.next()) {
-//                Perguntas obj = new Perguntas(rs.getString("pergunta"), rs.getString("resposta"));
-//                lista.add(obj);
-//            }
-//            Collections.shuffle(lista);
-//
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Erro ao Carregar Lista de Perguntas. " + ex);
-//            Logger.getLogger(PerguntasDAO.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return lista;
-//    }
-
     public ArrayList<Perguntas> carregaListaOrder() {
 
         ArrayList<Perguntas> lista = new ArrayList<>();
@@ -145,13 +141,20 @@ public class PerguntasDAO {
         }
         return lista;
     }
-    
+
+    /**
+     * MÉTODO QUE RETORNA TODAS AS QUESTÕES DE UMA MATÉRIA E UM PERÍDO DESEJADO
+     *
+     * @param materia - recebe a materia desejada.
+     * @param periodo - recebe o período desejado.
+     * @return - retorna uma lista array de Perguntas do conteúdo informado.
+     */
     public ArrayList<Perguntas> carregaListaEstudoBimestre(Integer materia, Integer periodo) {
 
         ArrayList<Perguntas> lista = new ArrayList<>();
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
         con.conectaBD();
-        String sql = "select * from ask where id_materia = "+ materia +" and id_periodo = " + periodo + " ;";
+        String sql = "select * from ask where id_materia = " + materia + " and id_periodo = " + periodo + " ;";
 
         try (PreparedStatement stmt = con.getConnection().prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
@@ -166,14 +169,19 @@ public class PerguntasDAO {
         }
         return lista;
     }
-    
-    
+
+    /**
+     * MÉTODO QUE RETORNA TODAS QUESTÕES INCLUINDO AS QUESTÕES
+     * DO PRIMEIRO E SEGUNDO BIMESTRE
+     * @param materia - recebe como parametro a matéria desejada.
+     * @return - retorna um array de Perguntas.
+     */
     public ArrayList<Perguntas> carregaListaEstudoSemestre(Integer materia) {
 
         ArrayList<Perguntas> lista = new ArrayList<>();
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
         con.conectaBD();
-        String sql = "select * from ask where id_materia = "+ materia +" ;";
+        String sql = "select * from ask where id_materia = " + materia + " ;";
 
         try (PreparedStatement stmt = con.getConnection().prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
@@ -188,6 +196,4 @@ public class PerguntasDAO {
         }
         return lista;
     }
-    
-
 }

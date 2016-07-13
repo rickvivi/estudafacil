@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.estudafacil.view;
 
 import br.com.estudafacil.controller.MateriasDAO;
@@ -21,6 +16,10 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
+/**
+ * PAINEL PARA TELA DE ESTUDOS
+ * @author Ricardo Vanni
+ */
 public class PanelEstudo extends javax.swing.JPanel {
 
     TelaEstudo telaEstudo;
@@ -46,10 +45,10 @@ public class PanelEstudo extends javax.swing.JPanel {
     private String periodoSelecionado; // EXIBE PERIODO
     private boolean btConfere = true; // VARÍAVEL DO BOTÃO - CONFERE / PROXIMO
     private boolean isLast = false; // VARIÁVEL PARA ULTIMA PERGUNTA
-    private boolean isFirst = true;
+    private boolean isFirst = true; // VARIÁVEL PARA SABER SE NÃO SÃO PERGUNTAS REPETIDAS A FIM DE GRAVAR NO RANKING
 
-    private int totalPerguntas = 0;
-    private int indexAsk = 0;
+    private int totalPerguntas = 0; // RECEBE O TOTAL DE PERGUNTAS DA MATÉRIA SELECIONADA
+    private int indexAsk = 0; // RECEBE O INDICE DE PERGUNTAS
 
     public PanelEstudo(TelaEstudo telaEst, TelaPrincipal telaPrincipal, String mat, int prd, ArrayList<Perguntas> list) {
         this.lista = list;
@@ -329,6 +328,9 @@ public class PanelEstudo extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * FUNÇÕES DO BOTÃO CLOSE
+     */
     private void lblCloseMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseMoved
         lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/close_mouse.png")));
     }//GEN-LAST:event_lblCloseMouseMoved

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.estudafacil.controller;
 
 import br.com.estudafacil.model.Materias;
@@ -17,12 +12,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Rick-Note
- */
 public class MateriasDAO {
 
+    /**
+     * METODO PARA SALVAR NOVAS MATÉRIAS NO BANCO DE DADOS
+     * @param txt - String com o nome da matéria a ser gravada.
+     */
     public void salvaMateria(String txt) {
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
         con.conectaBD();
@@ -42,31 +37,10 @@ public class MateriasDAO {
 
     }
 
-//    public ArrayList<String> verificaMaterias() {
-//        ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
-//        con.conectaBD();
-//        String retorno;
-//        ArrayList<String> lista = new ArrayList<>();
-//
-//        String sql = "select materia from materia";
-//
-//        try (PreparedStatement stmt = con.getConnection().prepareStatement(sql)) {
-//            ResultSet rs = stmt.executeQuery();
-//
-//            while (rs.next()) {
-//                retorno = rs.getString("materia");
-//                lista.add(retorno);
-//            }
-//
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Erro na busca de dados!" + ex);
-//            Logger
-//                    .getLogger(PerguntasDAO.class
-//                            .getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return lista;
-//    }
-
+    /**
+     * METODO PARA LISTAR TODAS AS MATÉRIAS DO BANCO DE DADOS
+     * @return retorna um array de Materias
+     */
     public ArrayList<Materias> carregaMaterias() {
 
         ArrayList<Materias> lista = new ArrayList<>();
@@ -91,6 +65,11 @@ public class MateriasDAO {
         return lista;
     }
 
+    /**
+     * MÉTODO PARA CAPTURAR O ID DA MATÉRIA
+     * @param materia - recebe uma string como parametro com nome da matéria.
+     * @return - retorna um inteiro com o numero da materia desejada.
+     */
     public Integer capturaID(String materia) {
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
         con.conectaBD();
@@ -114,6 +93,11 @@ public class MateriasDAO {
         return retorno;
     }
 
+    /**
+     * METODO PARA DELETAR A MATÉRIA DO BANCO DE DADOS
+     * @param materia - recebe uma string com nome da matéria como parâmetro
+     * em seguida deleta a matéria.
+     */
     public void deletaMateria(String materia) {
 
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();

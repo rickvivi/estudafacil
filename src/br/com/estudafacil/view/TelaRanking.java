@@ -1,6 +1,11 @@
 package br.com.estudafacil.view;
 
-
+/**
+ * TELA DE RANKING DE PERFORMANCE.
+ * NESSA TELA SERÁ EXIBIDA AS OITO MELHORES PERFORMANCES
+ * EM PORCENTAGEM DE ACERTO DO JOGO DE QUESTÕES
+ * @author Ricardo Vanni
+ */
 public class TelaRanking extends javax.swing.JDialog {
 
     TelaPrincipal telaPrincipal;

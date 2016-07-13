@@ -1,5 +1,9 @@
 package br.com.estudafacil.model;
 
+/**
+ * CLASSE PARA MANIPULAÇÃO DO OBJETO RANKING
+ * @author Ricardo Vanni
+ */
 public class Ranking {
 
     private int id;
@@ -7,8 +11,14 @@ public class Ranking {
     private int idPeriodo;
     private int porcentagem;
     
-    public Ranking(){
-        
+    public Ranking(){        
+    }
+    
+    public Ranking(int id_cod, int id_mat, int id_per, int porc){
+        this.id = id_cod;
+        this.idMateria = id_mat;
+        this.idPeriodo = id_per;
+        this.porcentagem = porc;
     }
 
     public int getId() {

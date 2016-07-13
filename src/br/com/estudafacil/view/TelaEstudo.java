@@ -1,16 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package br.com.estudafacil.view;
 
 import br.com.estudafacil.model.Perguntas;
 import java.util.ArrayList;
 
 /**
- *
- * @author Rick-Note
+ * TELA DE ESTUDO.
+ * NESTA TELA SERÁ MOSTRADA AS QUESTÕES DA MATERIA E PERÍODO ESCOLHIDOS
+ * PARA QUE O USUÁRIO ESTUDE RESPONDENDO AS QUESTÕES QUE APARECEM DE MODO
+ * SORTEADO.
+ * @author Ricardo Vanni
  */
 public class TelaEstudo extends javax.swing.JFrame {
 
