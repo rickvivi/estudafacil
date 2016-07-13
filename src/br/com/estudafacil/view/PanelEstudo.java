@@ -5,6 +5,8 @@
  */
 package br.com.estudafacil.view;
 
+import br.com.estudafacil.controller.MateriasDAO;
+import br.com.estudafacil.controller.RankingDAO;
 import br.com.estudafacil.model.Perguntas;
 import java.awt.Color;
 import java.awt.Container;
@@ -44,6 +46,7 @@ public class PanelEstudo extends javax.swing.JPanel {
     private String periodoSelecionado; // EXIBE PERIODO
     private boolean btConfere = true; // VARÍAVEL DO BOTÃO - CONFERE / PROXIMO
     private boolean isLast = false; // VARIÁVEL PARA ULTIMA PERGUNTA
+    private boolean isFirst = true;
 
     private int totalPerguntas = 0;
     private int indexAsk = 0;
@@ -388,139 +391,316 @@ public class PanelEstudo extends javax.swing.JPanel {
      * IMPLEMENTAÇÃO DAS FUNÇÕES DO BOTÃO CONFERE
      */
     private void lblBtnConfereMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBtnConfereMouseClicked
-        if (btConfere) {
-            /**
-             * VERIFICA SE ESTÁ NO ÚLTIMO INDICE DA LISTA E FAZ A ÚTIMA ETAPA
-             * PERGUNTANDO SE DESEJA NO FINAL TREINAR AS RESPOSTAS ERRADAS.
-             */
-            if (lista.size() == 1) {
-                // APRESENTA A RESPOSTA CORRETA
-                txtRespCorreta.setText(lista.get(indicePerguntas).getResposta());
+        if (isFirst) {
 
-                // JANELA DE CONFIRMAÇÃO SE A RESPOSTA FOI ACERTADA OU ERRADA
-                int resposta = JOptionPane.showConfirmDialog(null, "Você acertou a resposta?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
-                if (resposta == JOptionPane.YES_OPTION) {
-                    lblCertas.setText(Integer.toString(++respCertas));
-                } else {
-                    lblErradas.setText(Integer.toString(++respErradas));
-                    listaErros.add(lista.get(indicePerguntas));     // ADICIONA QUESTÃO ERRADA NA LISTA DE RESPOSTAS ERRADAS
-                }
-                lista.remove(indicePerguntas); // REMOVE A PERGUNTA DA LISTA DEPOIS DE RESPONDIDA
-                isLast = true; // MARCA ESTA PERGUNTA COMO SENDO A ULTIMA.
-            } else if (lista.size() > 1) {
+            if (btConfere) {
                 /**
-                 * SE NÃO FOR O ULTIMO INDICE DA LISTA FAZ O PROCESSO NORMAL
-                 * PASSANDO DE INDICE EM INDICE.
+                 * VERIFICA SE ESTÁ NO ÚLTIMO INDICE DA LISTA E FAZ A ÚTIMA
+                 * ETAPA PERGUNTANDO SE DESEJA NO FINAL TREINAR AS RESPOSTAS
+                 * ERRADAS.
                  */
-                // APRESENTA A RESPOSTA CORRETA
-                txtRespCorreta.setText(lista.get(indicePerguntas).getResposta());
+                if (lista.size() == 1) {
+                    // APRESENTA A RESPOSTA CORRETA
+                    txtRespCorreta.setText(lista.get(indicePerguntas).getResposta());
 
-                // JANELA DE CONFIRMAÇÃO SE A RESPOSTA FOI ACERTADA OU ERRADA
-                int resposta = JOptionPane.showConfirmDialog(null, "Você acertou a resposta?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
-                if (resposta == JOptionPane.YES_OPTION) {
-                    lblCertas.setText(Integer.toString(++respCertas));
-                } else {
-                    lblErradas.setText(Integer.toString(++respErradas));
-                    listaErros.add(lista.get(indicePerguntas));     // ADICIONA QUESTÃO ERRADA NA LISTA DE RESPOSTAS ERRADAS
-                }
-                // REMOVE A PERGUNTA DA LISTA DEPOIS DE RESPONDIDA
-                lista.remove(indicePerguntas);
-
-            }
-
-            // MUDA A FUNCIONALIDADE DO BOTÃO
-            btConfere = false;
-
-        } else if (isLast) {
-            // VERIFICA SE A LISTA DE PERGUNTAS ESTÁ VAZIA
-            if (listaErros.size() == 0) {
-                int resposta = JOptionPane.showConfirmDialog(null, "O Estudo Terminou... Deseja Estudar ("
-                        + materia + " - " + periodoSelecionado + ") Novamente?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
-                if (resposta == JOptionPane.YES_OPTION) {
-                    indexAsk = 0;
-                    totalPerguntas = listaBkp.size();
-                    lista.clear();
-                    for (Perguntas x : listaBkp) {
-                        lista.add(x);
+                    // JANELA DE CONFIRMAÇÃO SE A RESPOSTA FOI ACERTADA OU ERRADA
+                    int resposta = JOptionPane.showConfirmDialog(null, "Você acertou a resposta?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        lblCertas.setText(Integer.toString(++respCertas));
+                    } else {
+                        lblErradas.setText(Integer.toString(++respErradas));
+                        listaErros.add(lista.get(indicePerguntas));     // ADICIONA QUESTÃO ERRADA NA LISTA DE RESPOSTAS ERRADAS
                     }
-                    Collections.shuffle(lista);
+                    lista.remove(indicePerguntas); // REMOVE A PERGUNTA DA LISTA DEPOIS DE RESPONDIDA
+                    isLast = true; // MARCA ESTA PERGUNTA COMO SENDO A ULTIMA.
 
-                    // ZERA TODOS OS INDICES PARA REINICIAR O ESTUDO
-                    indicePerguntas = 0;
-                    respCertas = 0;
-                    respErradas = 0;
-                    lblCertas.setText(Integer.toString(respCertas));
-                    lblErradas.setText(Integer.toString(respErradas));
+                    /**
+                     * AQUI TERMINOU A RODADA DE PERGUNTAS, ENTÃO O SISTEMA
+                     * REGISTRA NO RANKING A PERFORMANCE ALCANÇADA NO JOGO DE
+                     * PERGUNTAS.
+                     */
+                    int ranking = (respCertas * 100) / listaBkp.size();
+                    int rk_mat, rk_prd;
 
-                    //ZERA OS CAMPOS E PASSA PARA PROXIMA PERGUNTA.
-                    lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
-                    txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
-                    txtResposta.setText("");
-                    txtRespCorreta.setText("");
-                    txtResposta.requestFocus();
+                    RankingDAO rkDAO = new RankingDAO();
+                    MateriasDAO matDAO = new MateriasDAO();
 
-                    // MUDA A FUNCIONALIDADE DO BOTÃO
-                    btConfere = true;
+                    rk_mat = matDAO.capturaID(materia);        
+                    rk_prd = periodo;
+                 
+                    rkDAO.gravaRanking(rk_mat, rk_prd, ranking);
 
-                } else {
-                    // AQUI, SE O USUARIO NAO DESEJA ESTUDAR MAIS A TELA É FINALIZADA.
-                    telaEstudo.dispose();
-                    telaprinc.setVisible(true);
+                    // MUDA A VARIÁVEL PARA NAO CLASSIFICAR QUANDO TREINAR ERROS
+                    isFirst = false;
+
+                } else if (lista.size() > 1) {
+                    /**
+                     * SE NÃO FOR O ULTIMO INDICE DA LISTA FAZ O PROCESSO NORMAL
+                     * PASSANDO DE INDICE EM INDICE.
+                     */
+                    // APRESENTA A RESPOSTA CORRETA
+                    txtRespCorreta.setText(lista.get(indicePerguntas).getResposta());
+
+                    // JANELA DE CONFIRMAÇÃO SE A RESPOSTA FOI ACERTADA OU ERRADA
+                    int resposta = JOptionPane.showConfirmDialog(null, "Você acertou a resposta?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        lblCertas.setText(Integer.toString(++respCertas));
+                    } else {
+                        lblErradas.setText(Integer.toString(++respErradas));
+                        listaErros.add(lista.get(indicePerguntas));     // ADICIONA QUESTÃO ERRADA NA LISTA DE RESPOSTAS ERRADAS
+                    }
+                    // REMOVE A PERGUNTA DA LISTA DEPOIS DE RESPONDIDA
+                    lista.remove(indicePerguntas);
+
                 }
-            } else {
+
+                // MUDA A FUNCIONALIDADE DO BOTÃO
+                btConfere = false;
+
+            } else if (isLast) {
                 /**
-                 * AQUI O JOGO DE PERGUNTAS JÁ TERMINOU,MAS AINDA EXISTEM ERROS
-                 * ENTÃO O PROGRAMA PERGUNTA SE O USUÁRIO DESEJA TREINAR APENAS
-                 * AS QUESTÕES QUE FORAM RESPONDIDAS ERRADAS.
+                 * AQUI O SISTEMA IDENTIFICA QUE O ESTUDO ACABOU E NÃO EXISTEM
+                 * ERROS PARA SEREM ESTUDADOS ENTÃO O SISTEMA PERGUNTA SE QUER
+                 * ESTUDAR O MESMO CONTEÚDO NOVAMENTE, SENÃO ELE FECHA.
                  */
-                int resposta = JOptionPane.showConfirmDialog(null, "As questões terminaram. Deseja estudar apenas as "
-                        + "questões que você errou?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
-                if (resposta == JOptionPane.YES_OPTION) {
-                    // PASSA A LISTA DE ERRADAS PARA A LISTA DO JOGO E ZERA OS INDICES
-                    indexAsk = 0;
-                    totalPerguntas = listaErros.size();
-                    lista.clear();
-                    for (Perguntas x : listaErros) {
-                        lista.add(x);
+                if (listaErros.size() == 0) {
+                    int resposta = JOptionPane.showConfirmDialog(null, "O Estudo Terminou... Deseja Estudar ("
+                            + materia + " - " + periodoSelecionado + ") Novamente?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        indexAsk = 0;
+                        totalPerguntas = listaBkp.size();
+                        lista.clear();
+                        for (Perguntas x : listaBkp) {
+                            lista.add(x);
+                        }
+                        Collections.shuffle(lista);
+
+                        // ZERA TODOS OS INDICES PARA REINICIAR O ESTUDO
+                        indicePerguntas = 0;
+                        respCertas = 0;
+                        respErradas = 0;
+                        lblCertas.setText(Integer.toString(respCertas));
+                        lblErradas.setText(Integer.toString(respErradas));
+
+                        //ZERA OS CAMPOS E PASSA PARA PROXIMA PERGUNTA.
+                        lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
+                        txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
+                        txtResposta.setText("");
+                        txtRespCorreta.setText("");
+                        txtResposta.requestFocus();
+
+                        // MUDA A FUNCIONALIDADE DO BOTÃO
+                        btConfere = true;
+                        
+                    } else {
+                        // AQUI, SE O USUARIO NAO DESEJA ESTUDAR MAIS A TELA É FINALIZADA.
+                        telaEstudo.dispose();
+                        telaprinc.setVisible(true);
                     }
-                    listaErros.clear();
-                    Collections.shuffle(lista);
-                    indicePerguntas = 0;
-                    respCertas = 0;
-                    respErradas = 0;
-                    lblCertas.setText(Integer.toString(respCertas));
-                    lblErradas.setText(Integer.toString(respErradas));
-
-                    // ZERA OS CAMPOS E PASSA PARA A PROXIMA PERGUNTA
-                    lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
-                    txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
-                    txtResposta.setText("");
-                    txtRespCorreta.setText("");
-                    txtResposta.requestFocus();
-
-                    // MUDA A FUNCIONALIDADE DO BOTÃO
-                    btConfere = true;
                 } else {
                     /**
-                     * AQUI SE A RESPOSTA FOR NÃO DESEJA ESTUDAR AS ERRADAS...
-                     * ENTÃO FECHA A TELA DE ESTUDOS.
+                     * AQUI O JOGO DE PERGUNTAS JÁ TERMINOU,MAS AINDA EXISTEM
+                     * ERROS ENTÃO O PROGRAMA PERGUNTA SE O USUÁRIO DESEJA
+                     * TREINAR APENAS AS QUESTÕES QUE FORAM RESPONDIDAS ERRADAS.
                      */
-                    telaEstudo.dispose();
-                    telaprinc.setVisible(true);
+                    int resposta = JOptionPane.showConfirmDialog(null, "As questões terminaram. Deseja estudar apenas as "
+                            + "questões que você errou?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        // PASSA A LISTA DE ERRADAS PARA A LISTA DO JOGO E ZERA OS INDICES
+                        indexAsk = 0;
+                        totalPerguntas = listaErros.size();
+                        lista.clear();
+                        for (Perguntas x : listaErros) {
+                            lista.add(x);
+                        }
+                        listaErros.clear();
+                        Collections.shuffle(lista);
+                        indicePerguntas = 0;
+                        respCertas = 0;
+                        respErradas = 0;
+                        lblCertas.setText(Integer.toString(respCertas));
+                        lblErradas.setText(Integer.toString(respErradas));
+
+                        // ZERA OS CAMPOS E PASSA PARA A PROXIMA PERGUNTA
+                        lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
+                        txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
+                        txtResposta.setText("");
+                        txtRespCorreta.setText("");
+                        txtResposta.requestFocus();
+
+                        // MUDA A FUNCIONALIDADE DO BOTÃO
+                        btConfere = true;
+                    } else {
+                        /**
+                         * AQUI SE A RESPOSTA FOR NÃO DESEJA ESTUDAR AS
+                         * ERRADAS... ENTÃO FECHA A TELA DE ESTUDOS.
+                         */
+                        telaEstudo.dispose();
+                        telaprinc.setVisible(true);
+                    }
+
+                }
+                isLast = false;
+            } else {
+                // ZERA OS CAMPOS E PASSA PARA A PROXIMA PERGUNTA
+                txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
+                txtResposta.setText("");
+                txtRespCorreta.setText("");
+                txtResposta.requestFocus();
+                lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
+
+                // MUDA A FUNCIONALIDADE DO BOTÃO
+                btConfere = true;
+            }
+        } else {
+            /**
+             * AQUI ESTÁ FORA DA CLASSIFICAÇÃO, ESTA PARTE DO SISTEMA É USADA
+             * QUANDO ESTÁ APENAS ESTUDANDO OS ERROS
+             */
+            
+            if (btConfere) {
+                /**
+                 * VERIFICA SE ESTÁ NO ÚLTIMO INDICE DA LISTA E FAZ A ÚTIMA
+                 * ETAPA PERGUNTANDO SE DESEJA NO FINAL TREINAR AS RESPOSTAS
+                 * ERRADAS.
+                 */
+                if (lista.size() == 1) {
+                    // APRESENTA A RESPOSTA CORRETA
+                    txtRespCorreta.setText(lista.get(indicePerguntas).getResposta());
+
+                    // JANELA DE CONFIRMAÇÃO SE A RESPOSTA FOI ACERTADA OU ERRADA
+                    int resposta = JOptionPane.showConfirmDialog(null, "Você acertou a resposta?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        lblCertas.setText(Integer.toString(++respCertas));
+                    } else {
+                        lblErradas.setText(Integer.toString(++respErradas));
+                        listaErros.add(lista.get(indicePerguntas));     // ADICIONA QUESTÃO ERRADA NA LISTA DE RESPOSTAS ERRADAS
+                    }
+                    lista.remove(indicePerguntas); // REMOVE A PERGUNTA DA LISTA DEPOIS DE RESPONDIDA
+                    isLast = true; // MARCA ESTA PERGUNTA COMO SENDO A ULTIMA.
+                                  
+
+                } else if (lista.size() > 1) {
+                    /**
+                     * SE NÃO FOR O ULTIMO INDICE DA LISTA FAZ O PROCESSO NORMAL
+                     * PASSANDO DE INDICE EM INDICE.
+                     */
+                    // APRESENTA A RESPOSTA CORRETA
+                    txtRespCorreta.setText(lista.get(indicePerguntas).getResposta());
+
+                    // JANELA DE CONFIRMAÇÃO SE A RESPOSTA FOI ACERTADA OU ERRADA
+                    int resposta = JOptionPane.showConfirmDialog(null, "Você acertou a resposta?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        lblCertas.setText(Integer.toString(++respCertas));
+                    } else {
+                        lblErradas.setText(Integer.toString(++respErradas));
+                        listaErros.add(lista.get(indicePerguntas));     // ADICIONA QUESTÃO ERRADA NA LISTA DE RESPOSTAS ERRADAS
+                    }
+                    // REMOVE A PERGUNTA DA LISTA DEPOIS DE RESPONDIDA
+                    lista.remove(indicePerguntas);
+
                 }
 
-            }
-            isLast = false;
-        } else {
-            // ZERA OS CAMPOS E PASSA PARA A PROXIMA PERGUNTA
-            txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
-            txtResposta.setText("");
-            txtRespCorreta.setText("");
-            txtResposta.requestFocus();
-            lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
+                // MUDA A FUNCIONALIDADE DO BOTÃO
+                btConfere = false;
 
-            // MUDA A FUNCIONALIDADE DO BOTÃO
-            btConfere = true;
+            } else if (isLast) {
+                /**
+                 * AQUI O SISTEMA IDENTIFICA QUE O ESTUDO ACABOU E NÃO EXISTEM
+                 * ERROS PARA SEREM ESTUDADOS ENTÃO O SISTEMA PERGUNTA SE QUER
+                 * ESTUDAR O MESMO CONTEÚDO NOVAMENTE, SENÃO ELE FECHA.
+                 */
+                if (listaErros.size() == 0) {
+                    int resposta = JOptionPane.showConfirmDialog(null, "O Estudo Terminou... Deseja Estudar ("
+                            + materia + " - " + periodoSelecionado + ") Novamente?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        indexAsk = 0;
+                        totalPerguntas = listaBkp.size();
+                        lista.clear();
+                        for (Perguntas x : listaBkp) {
+                            lista.add(x);
+                        }
+                        Collections.shuffle(lista);
+
+                        // ZERA TODOS OS INDICES PARA REINICIAR O ESTUDO
+                        indicePerguntas = 0;
+                        respCertas = 0;
+                        respErradas = 0;
+                        lblCertas.setText(Integer.toString(respCertas));
+                        lblErradas.setText(Integer.toString(respErradas));
+
+                        //ZERA OS CAMPOS E PASSA PARA PROXIMA PERGUNTA.
+                        lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
+                        txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
+                        txtResposta.setText("");
+                        txtRespCorreta.setText("");
+                        txtResposta.requestFocus();
+
+                        // MUDA A FUNCIONALIDADE DO BOTÃO
+                        btConfere = true;
+                        
+                        isFirst = true;
+                        
+                    } else {
+                        // AQUI, SE O USUARIO NAO DESEJA ESTUDAR MAIS A TELA É FINALIZADA.
+                        telaEstudo.dispose();
+                        telaprinc.setVisible(true);
+                    }
+                } else {
+                    /**
+                     * AQUI O JOGO DE PERGUNTAS JÁ TERMINOU,MAS AINDA EXISTEM
+                     * ERROS ENTÃO O PROGRAMA PERGUNTA SE O USUÁRIO DESEJA
+                     * TREINAR APENAS AS QUESTÕES QUE FORAM RESPONDIDAS ERRADAS.
+                     */
+                    int resposta = JOptionPane.showConfirmDialog(null, "As questões terminaram. Deseja estudar apenas as "
+                            + "questões que você errou?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
+                    if (resposta == JOptionPane.YES_OPTION) {
+                        // PASSA A LISTA DE ERRADAS PARA A LISTA DO JOGO E ZERA OS INDICES
+                        indexAsk = 0;
+                        totalPerguntas = listaErros.size();
+                        lista.clear();
+                        for (Perguntas x : listaErros) {
+                            lista.add(x);
+                        }
+                        listaErros.clear();
+                        Collections.shuffle(lista);
+                        indicePerguntas = 0;
+                        respCertas = 0;
+                        respErradas = 0;
+                        lblCertas.setText(Integer.toString(respCertas));
+                        lblErradas.setText(Integer.toString(respErradas));
+
+                        // ZERA OS CAMPOS E PASSA PARA A PROXIMA PERGUNTA
+                        lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
+                        txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
+                        txtResposta.setText("");
+                        txtRespCorreta.setText("");
+                        txtResposta.requestFocus();
+
+                        // MUDA A FUNCIONALIDADE DO BOTÃO
+                        btConfere = true;
+                    } else {
+                        /**
+                         * AQUI SE A RESPOSTA FOR NÃO DESEJA ESTUDAR AS
+                         * ERRADAS... ENTÃO FECHA A TELA DE ESTUDOS.
+                         */
+                        telaEstudo.dispose();
+                        telaprinc.setVisible(true);
+                    }
+
+                }
+                isLast = false;
+            } else {
+                // ZERA OS CAMPOS E PASSA PARA A PROXIMA PERGUNTA
+                txtPergunta.setText(lista.get(indicePerguntas).getPergunta());
+                txtResposta.setText("");
+                txtRespCorreta.setText("");
+                txtResposta.requestFocus();
+                lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
+
+                // MUDA A FUNCIONALIDADE DO BOTÃO
+                btConfere = true;
+            }
         }
     }//GEN-LAST:event_lblBtnConfereMouseClicked
 

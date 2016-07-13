@@ -21,7 +21,7 @@ import javax.swing.JPanel;
  * @author Rick-Note
  */
 public class PanelPrincipal extends javax.swing.JPanel {
-    
+
     TelaPrincipal telaPrinc;
 
     BufferedImage imagemFundo, imagemFundo2, imagemLogo;
@@ -31,9 +31,9 @@ public class PanelPrincipal extends javax.swing.JPanel {
      */
     public PanelPrincipal(TelaPrincipal telaPrincial) {
         this.telaPrinc = telaPrincial;
-        
+
         initComponents();
-        
+
         try {
             File img = new File("src/botoes/bannerfundo.png");
             File img2 = new File("src/botoes/sala_aula.jpg");
@@ -250,7 +250,13 @@ public class PanelPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_lblBTRankingMouseMoved
 
     private void lblBTRankingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBTRankingMouseClicked
-       
+        telaPrinc.dispose();
+        /**
+         * O método dispose() deve ser colocado antes da criação do JDialog,
+         * pois se for colocado depois ele impossibilita que a janela seja fechada
+         */
+        TelaRanking tela = new TelaRanking(telaPrinc, true, telaPrinc);
+        tela.setVisible(true);
     }//GEN-LAST:event_lblBTRankingMouseClicked
 
     private void lblBTRankingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBTRankingMouseExited
@@ -265,7 +271,6 @@ public class PanelPrincipal extends javax.swing.JPanel {
         lblBTRanking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/rk_perf_2.png")));
     }//GEN-LAST:event_lblBTRankingMouseReleased
 
-    
     /**
      * IMPLEMENTAÇÃO DAS FUNÇÕES DO BOTÃO DE ESTUDE
      */
@@ -297,6 +302,5 @@ public class PanelPrincipal extends javax.swing.JPanel {
     private javax.swing.JLabel lblBTEstude;
     private javax.swing.JLabel lblBTRanking;
     // End of variables declaration//GEN-END:variables
-  
-}
 
+}
