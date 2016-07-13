@@ -68,6 +68,7 @@ public class PanelPrincipal extends javax.swing.JPanel {
         lblBTCadPergunta = new javax.swing.JLabel();
         lblBTRanking = new javax.swing.JLabel();
         lblBTEstude = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(925, 560));
@@ -158,6 +159,9 @@ public class PanelPrincipal extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel5.setText("Developed by Ricardo Vanni");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -172,6 +176,9 @@ public class PanelPrincipal extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblBTEstude)
                 .addGap(19, 19, 19))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,7 +189,8 @@ public class PanelPrincipal extends javax.swing.JPanel {
                     .addComponent(lblBTRanking)
                     .addComponent(lblBTCadMateria)
                     .addComponent(lblBTCadPergunta))
-                .addContainerGap(492, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 472, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -297,6 +305,7 @@ public class PanelPrincipal extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblBTCadMateria;
     private javax.swing.JLabel lblBTCadPergunta;
     private javax.swing.JLabel lblBTEstude;

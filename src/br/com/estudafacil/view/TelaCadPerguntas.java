@@ -39,11 +39,15 @@ public class TelaCadPerguntas extends javax.swing.JDialog {
         pnPrincipal = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(925, 560));
-        setMinimumSize(new java.awt.Dimension(925, 560));
+        setMaximumSize(new java.awt.Dimension(949, 560));
+        setMinimumSize(new java.awt.Dimension(949, 560));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(925, 560));
+        setPreferredSize(new java.awt.Dimension(949, 560));
 
+        pnPrincipal.setMaximumSize(new java.awt.Dimension(949, 560));
+        pnPrincipal.setMinimumSize(new java.awt.Dimension(949, 560));
+        pnPrincipal.setOpaque(false);
+        pnPrincipal.setPreferredSize(new java.awt.Dimension(949, 560));
         pnPrincipal.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

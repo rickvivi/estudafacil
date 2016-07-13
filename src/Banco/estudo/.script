@@ -54,10 +54,7 @@ SET SCHEMA SYSTEM_LOBS
 INSERT INTO BLOCKS VALUES(0,2147483647,0)
 SET SCHEMA PUBLIC
 INSERT INTO MATERIA VALUES(0,'Engenharia de Software')
-INSERT INTO MATERIA VALUES(1,'Sistemas Distribuidos')
 INSERT INTO MATERIA VALUES(8,'Qualidade de Software')
-INSERT INTO ASK VALUES(98,1,'Teste do Campo de Cadastro de Perguntas','Teste do Campo de Cadastro de Respostas',0)
-INSERT INTO ASK VALUES(99,1,'Vamos Testar?\u0009','Ent\u00e3o T\u00e1',1)
 INSERT INTO ASK VALUES(100,0,'Teste primeiro bimestre\u0009','resposta primeiro',0)
 INSERT INTO ASK VALUES(101,0,'outro teste primeiro bimestre','primeiro bimestre',0)
 INSERT INTO ASK VALUES(102,0,'teste segundo bimestre','segundo bimestre',1)

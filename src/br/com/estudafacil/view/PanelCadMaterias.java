@@ -62,16 +62,22 @@ public class PanelCadMaterias extends javax.swing.JPanel {
     private void initComponents() {
 
         rgbBtn = new javax.swing.ButtonGroup();
+        jLabel5 = new javax.swing.JLabel();
         lblClose = new javax.swing.JLabel();
         rbCad = new javax.swing.JRadioButton();
         rbDelete = new javax.swing.JRadioButton();
         pnCad = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(0, 51, 255));
         setMaximumSize(new java.awt.Dimension(750, 417));
         setMinimumSize(new java.awt.Dimension(750, 417));
         setPreferredSize(new java.awt.Dimension(750, 417));
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel5.setText("Developed by Ricardo Vanni");
 
         lblClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/close_normal.png"))); // NOI18N
         lblClose.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -124,7 +130,7 @@ public class PanelCadMaterias extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap(220, Short.MAX_VALUE)
                         .addComponent(lblTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(lblClose))
@@ -139,6 +145,9 @@ public class PanelCadMaterias extends javax.swing.JPanel {
                                 .addComponent(rbDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +163,8 @@ public class PanelCadMaterias extends javax.swing.JPanel {
                     .addComponent(rbDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(pnCad, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(123, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addComponent(jLabel5))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -205,6 +215,7 @@ public class PanelCadMaterias extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblClose;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel pnCad;

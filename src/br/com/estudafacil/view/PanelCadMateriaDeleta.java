@@ -123,7 +123,7 @@ public class PanelCadMateriaDeleta extends javax.swing.JPanel {
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
 
         if (jcbMaterias.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(null, "Selecione uma Matéria antes de clicar em 'Deletaar'.");
+            JOptionPane.showMessageDialog(null, "Selecione uma Matéria antes de clicar em 'Deletar'.");
         } else {
             MateriasDAO dao = new MateriasDAO();
             int resposta = JOptionPane.showConfirmDialog(null, "Deseja Excluir a Matéria: '" + jcbMaterias.getSelectedItem() + "'?", "Janela de Confirmação", JOptionPane.YES_NO_OPTION);
