@@ -3,15 +3,9 @@ package br.com.estudafacil.view;
 import br.com.estudafacil.controller.MateriasDAO;
 import br.com.estudafacil.model.Materias;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.text.Collator;
+import java.awt.Image;
 import java.util.ArrayList;
-import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,17 +14,13 @@ import javax.swing.JOptionPane;
  */
 public class PanelCadMateriaDeleta extends javax.swing.JPanel {
 
-    BufferedImage imagem;
+    private final Image imagem;
     ArrayList<Materias> lista = new ArrayList<>();
     
     public PanelCadMateriaDeleta() {
         initComponents();
 
-        try {
-            this.imagem = ImageIO.read(new File("src/botoes/boneco_apagando.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(PanelCadMateriaDeleta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        imagem = new ImageIcon(getClass().getResource("/Botoes/boneco_apagando.JPG")).getImage();
 
         /**
          * CARREGA LISTA DE MATÉRIAS CADASTRADAS
@@ -48,6 +38,7 @@ public class PanelCadMateriaDeleta extends javax.swing.JPanel {
 
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(imagem, 0, 0, this);

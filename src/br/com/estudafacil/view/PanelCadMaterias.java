@@ -1,15 +1,8 @@
 package br.com.estudafacil.view;
 
-import br.com.estudafacil.view.PanelCadMateriaDeleta;
-
-import java.awt.Container;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
  * PAINEL DA TELA DE CADASTRO DE MATÉRIAS
@@ -19,19 +12,16 @@ public class PanelCadMaterias extends javax.swing.JPanel {
     
     TelaCadMaterias telaCadMaterias;
 
-    BufferedImage imagem;
+    private final Image imagem;
+    
     PanelCadMateriaSalva painelSalva = new PanelCadMateriaSalva();
 
     public PanelCadMaterias(TelaCadMaterias telaCad) {
         this.telaCadMaterias = telaCad;
         initComponents();
 
-        try {
-            this.imagem = ImageIO.read(new File("src/botoes/tela_cad_materias.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(PanelCadMaterias.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        imagem = new ImageIcon(getClass().getResource("/Botoes/tela_cad_materias.png")).getImage();
+        
         rgbBtn.add(rbCad);
         rgbBtn.add(rbDelete);
 

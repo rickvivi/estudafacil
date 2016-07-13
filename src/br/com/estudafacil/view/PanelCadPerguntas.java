@@ -4,15 +4,10 @@ import br.com.estudafacil.controller.MateriasDAO;
 import br.com.estudafacil.controller.PerguntasDAO;
 import br.com.estudafacil.model.Materias;
 import br.com.estudafacil.model.Perguntas;
-import java.awt.Container;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.Image;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class PanelCadPerguntas extends javax.swing.JPanel {
 
-    BufferedImage imagemFundo;
+    private final Image imagemFundo;
     
     int contador = 0;
     boolean novo = true;
@@ -35,11 +30,7 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
         this.telaCadPerguntas = telaCad;
         initComponents();
         
-        try {
-            this.imagemFundo = ImageIO.read(new File("src/Botoes/bannerazul.png"));
-        } catch (IOException ex) {
-            Logger.getLogger(PanelCadPerguntas.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        imagemFundo = new ImageIcon(getClass().getResource("/Botoes/BannerAzul.png")).getImage();
         
         txtPergunta.setVisible(false);
         txtResposta.setVisible(false);

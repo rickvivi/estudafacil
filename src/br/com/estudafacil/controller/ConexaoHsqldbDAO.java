@@ -1,5 +1,7 @@
 package br.com.estudafacil.controller;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,7 +15,7 @@ public class ConexaoHsqldbDAO {
     String driver = "org.hsqldb.jdbc.JDBCDriver";
    
     String url = "jdbc:hsqldb:file:";
-    String caminho = "src/banco/estudo/"; 
+    String caminho = "BD/estudo/"; // src/banco/estudo     bd/estudo
     String user = "SA";
     String senha = "";
     

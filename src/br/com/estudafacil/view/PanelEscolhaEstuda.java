@@ -4,15 +4,10 @@ import br.com.estudafacil.controller.MateriasDAO;
 import br.com.estudafacil.controller.PerguntasDAO;
 import br.com.estudafacil.model.Materias;
 import br.com.estudafacil.model.Perguntas;
-import java.awt.Container;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.Image;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,7 +19,7 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
     TelaPrincipal telaPrinc;
     TelaEscolhaEstudo telaEscolhaEstudo;
 
-    BufferedImage fundoEscolhaEstuda;
+    private final Image fundoEscolhaEstuda;
 
     ArrayList<Materias> lista = new ArrayList<>();
     MateriasDAO dao = new MateriasDAO();
@@ -45,12 +40,8 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
         rbSegundo.setActionCommand("segundo");
         rbTotal.setActionCommand("total");
 
-        try {
-            this.fundoEscolhaEstuda = ImageIO.read(new File("src/botoes/fundo_escolha_estuda.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(PanelEscolhaEstuda.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        fundoEscolhaEstuda = new ImageIcon(getClass().getResource("/Botoes/fundo_escolha_estuda.jpg")).getImage();
+       
         lista = dao.carregaMaterias();
 
         for (Materias x : lista) {
@@ -59,6 +50,7 @@ public class PanelEscolhaEstuda extends javax.swing.JPanel {
 
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 

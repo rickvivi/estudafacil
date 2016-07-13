@@ -3,17 +3,11 @@ package br.com.estudafacil.view;
 import br.com.estudafacil.controller.MateriasDAO;
 import br.com.estudafacil.controller.RankingDAO;
 import br.com.estudafacil.model.Perguntas;
-import java.awt.Color;
-import java.awt.Container;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.Image;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,7 +18,7 @@ public class PanelEstudo extends javax.swing.JPanel {
 
     TelaEstudo telaEstudo;
     TelaPrincipal telaprinc;
-    BufferedImage img, img2;
+    private final Image img, img2;
 
     /**
      * VARIÁVEIS PARA RECEBER OS PARÂMETROS DA MATÉRIA A SER ESTUDADA.
@@ -57,23 +51,23 @@ public class PanelEstudo extends javax.swing.JPanel {
         this.materia = mat;
         this.periodo = prd;
 
-        try {
-            this.img = ImageIO.read(new File("src/botoes/fundo_topo.png"));
-            this.img2 = ImageIO.read(new File("src/botoes/pergunta.jpeg"));
-        } catch (IOException ex) {
-            Logger.getLogger(PanelEstudo.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        img = new ImageIcon(getClass().getResource("/Botoes/fundo_topo.png")).getImage();
+        img2 = new ImageIcon(getClass().getResource("/Botoes/pergunta.jpeg")).getImage();
 
         initComponents();
 
         lblMateriaSelecionada.setText(materia); // EXIBE A MATERIA SELECIONADA NO PAINEL
         // EXIBE O PERIODO SELECIONADO NO PAINEL
-        if (periodo == 0) {
-            periodoSelecionado = "Conteúdo do 1º Bimestre";
-        } else if (periodo == 1) {
-            periodoSelecionado = "Conteúdo do 2º Bimestre";
-        } else {
-            periodoSelecionado = "Conteúdo do Semestre";
+        switch (periodo) {
+            case 0:
+                periodoSelecionado = "Conteúdo do 1º Bimestre";
+                break;
+            case 1:
+                periodoSelecionado = "Conteúdo do 2º Bimestre";
+                break;
+            default:
+                periodoSelecionado = "Conteúdo do Semestre";
+                break;
         }
         lblPeriodoSelecionado.setText(periodoSelecionado);
 

@@ -1,6 +1,8 @@
 
 package br.com.estudafacil.view;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 /**
@@ -9,10 +11,15 @@ import javax.swing.JPanel;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    private final Image img;
     
     public TelaPrincipal() {
         initComponents();
         this.setResizable(false); //Impossibilita de alterar o tamanho do Frame
+        this.setTitle("EstudaFacil - Academic Training 1.0");
+        
+        img = new ImageIcon(getClass().getResource("/Botoes/logotipo.png")).getImage();
+        this.setIconImage(img);
         
         PanelPrincipal painel = new PanelPrincipal(this);
         pnPrincipal.add(painel);

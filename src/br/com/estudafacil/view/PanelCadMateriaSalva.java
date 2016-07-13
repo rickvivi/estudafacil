@@ -5,19 +5,14 @@
  */
 package br.com.estudafacil.view;
 
-import br.com.estudafacil.view.PanelCadMateriaDeleta;
 import br.com.estudafacil.controller.MateriasDAO;
 import br.com.estudafacil.model.Materias;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.Image;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Locale;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
@@ -27,7 +22,7 @@ import javax.swing.JOptionPane;
  */
 public class PanelCadMateriaSalva extends javax.swing.JPanel {
 
-    BufferedImage imagem;
+    private final Image imagem;
 
     private JComboBox<String> jcbLista = new JComboBox<>();
 
@@ -37,14 +32,11 @@ public class PanelCadMateriaSalva extends javax.swing.JPanel {
     public PanelCadMateriaSalva() {
         initComponents();
 
-        try {
-            this.imagem = ImageIO.read(new File("src/botoes/boneco-mostrando-o-livro1.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(PanelCadMateriaSalva.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        imagem = new ImageIcon(getClass().getResource("/Botoes/boneco-mostrando-o-livro1.jpg")).getImage();
+        
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(imagem, 0, 0, this);

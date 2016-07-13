@@ -3,13 +3,9 @@ package br.com.estudafacil.view;
 import br.com.estudafacil.controller.RankingDAO;
 import br.com.estudafacil.model.Ranking;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
+import java.awt.Image;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -22,7 +18,7 @@ public class PanelRanking extends javax.swing.JPanel {
     TelaPrincipal telaPrinc;
     TelaRanking telaRanking;
 
-    BufferedImage img;
+    private final Image img;
 
     private ArrayList<JLabel> label = new ArrayList<>();
     private ArrayList<Ranking> listaRk = new ArrayList<>();
@@ -39,11 +35,7 @@ public class PanelRanking extends javax.swing.JPanel {
         initComponents();
 
         // PINTA O FUNDO DO PAINEL COM A IMAGEM SELECIONADA
-        try {
-            this.img = ImageIO.read(new File("src/botoes/fundo_ranking.jpg"));
-        } catch (IOException ex) {
-            Logger.getLogger(PanelRanking.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        img = new ImageIcon(getClass().getResource("/Botoes/fundo_ranking.jpg")).getImage();
 
         // TORNA AS POSIÇÕES DO RANKING INVISIVEIS ATÉ PREENCHER COM A CLASSIFICAÇÃO
         addLabels();
@@ -74,12 +66,16 @@ public class PanelRanking extends javax.swing.JPanel {
 
             // PREENCHE O PERIODO DO RANKING
             String period;
-            if (i.getIdPeriodo() == 0) {
-                period = "1º Bimestre";
-            } else if (i.getIdPeriodo() == 1) {
-                period = "2º Bimestre";
-            } else {
-                period = "Semestral";
+            switch (i.getIdPeriodo()) {
+                case 0:
+                    period = "1º Bimestre";
+                    break;
+                case 1:
+                    period = "2º Bimestre";
+                    break;
+                default:
+                    period = "Semestral";
+                    break;
             }
             label.get(cont).setText(period);
             label.get(cont++).setVisible(true);

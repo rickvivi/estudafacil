@@ -1,44 +1,32 @@
 package br.com.estudafacil.view;
 
-import java.awt.Container;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import java.awt.Image;
+import javax.swing.ImageIcon;
 
 /**
- * PAINEL DA TELA PRINCIPAL 
+ * PAINEL DA TELA PRINCIPAL
+ *
  * @author Rick-Note
  */
 public class PanelPrincipal extends javax.swing.JPanel {
 
     TelaPrincipal telaPrinc;
 
-    BufferedImage imagemFundo, imagemFundo2, imagemLogo;
+    private final Image imagemFundo, imagemFundo2, imagemLogo;
     
     public PanelPrincipal(TelaPrincipal telaPrincial) {
         this.telaPrinc = telaPrincial;
 
         initComponents();
 
-        try {
-            File img = new File("src/botoes/bannerfundo.png");
-            File img2 = new File("src/botoes/sala_aula.jpg");
-            File imgLogo = new File("src/botoes/logo.png");
-            this.imagemFundo = ImageIO.read(img);
-            this.imagemFundo2 = ImageIO.read(img2);
-            this.imagemLogo = ImageIO.read(imgLogo);
-        } catch (IOException ex) {
-            Logger.getLogger(PanelPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        imagemFundo = new ImageIcon(getClass().getResource("/Botoes/BannerFundo.png")).getImage();
+        imagemFundo2 = new ImageIcon(getClass().getResource("/Botoes/sala_aula.jpg")).getImage(); 
+        imagemLogo = new ImageIcon(getClass().getResource("/Botoes/Logo.png")).getImage();
 
     }
 
+    @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -241,7 +229,8 @@ public class PanelPrincipal extends javax.swing.JPanel {
         telaPrinc.dispose();
         /**
          * O método dispose() deve ser colocado antes da criação do JDialog,
-         * pois se for colocado depois ele impossibilita que a janela seja fechada
+         * pois se for colocado depois ele impossibilita que a janela seja
+         * fechada
          */
         TelaRanking tela = new TelaRanking(telaPrinc, true, telaPrinc);
         tela.setVisible(true);
