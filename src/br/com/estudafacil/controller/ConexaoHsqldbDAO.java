@@ -15,7 +15,7 @@ public class ConexaoHsqldbDAO {
     String driver = "org.hsqldb.jdbc.JDBCDriver";
    
     String url = "jdbc:hsqldb:file:";
-    String caminho = "bd/estudo/"; // src/banco/estudo     bd/estudo
+    String caminho = "src/banco/estudo/"; // src/banco/estudo     bd/estudo
     String user = "SA";
     String senha = "";
     

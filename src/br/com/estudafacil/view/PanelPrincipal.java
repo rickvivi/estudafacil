@@ -226,7 +226,7 @@ public class PanelPrincipal extends javax.swing.JPanel {
     }//GEN-LAST:event_lblBTRankingMouseMoved
 
     private void lblBTRankingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBTRankingMouseClicked
-        telaPrinc.dispose();
+       // telaPrinc.dispose();
         /**
          * O método dispose() deve ser colocado antes da criação do JDialog,
          * pois se for colocado depois ele impossibilita que a janela seja

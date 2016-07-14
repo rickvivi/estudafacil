@@ -16,6 +16,7 @@ public class MateriasDAO {
 
     /**
      * METODO PARA SALVAR NOVAS MATÉRIAS NO BANCO DE DADOS
+     *
      * @param txt - String com o nome da matéria a ser gravada.
      */
     public void salvaMateria(String txt) {
@@ -39,6 +40,7 @@ public class MateriasDAO {
 
     /**
      * METODO PARA LISTAR TODAS AS MATÉRIAS DO BANCO DE DADOS
+     *
      * @return retorna um array de Materias
      */
     public ArrayList<Materias> carregaMaterias() {
@@ -67,6 +69,7 @@ public class MateriasDAO {
 
     /**
      * MÉTODO PARA CAPTURAR O ID DA MATÉRIA
+     *
      * @param materia - recebe uma string como parametro com nome da matéria.
      * @return - retorna um inteiro com o numero da materia desejada.
      */
@@ -92,14 +95,20 @@ public class MateriasDAO {
         }
         return retorno;
     }
-    
-    
+
+    /**
+     * ESTE MÉTODO RECEBE A ID DA MATÉRIA GRAVADA NA TABELA ASK
+     * E RETORNA UMA STRING COM O NOME DA MATÉRIA REFERENTE A ID INFORMADA
+     * É UTILIZADA NOS BOTÕES AVANÇA E VOLTA DA TELA DE CADASTRO DE
+     * PERGUNTAS, PARA SELECIONAR A MATÉRIA CORRETA ENQUANTO AVANÇA OU
+     * VOLTA PERCORRENDO AS QUESTÕES
+     */
     public String capturaMaterioaById(int id) {
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
         con.conectaBD();
         String retorno = "";
 
-        String sql = "select materia from materia where id  = " + id ;
+        String sql = "select materia from materia where id  = " + id;
 
         try (PreparedStatement stmt = con.getConnection().prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
@@ -119,14 +128,15 @@ public class MateriasDAO {
 
     /**
      * METODO PARA DELETAR A MATÉRIA DO BANCO DE DADOS
-     * @param materia - recebe uma string com nome da matéria como parâmetro
-     * em seguida deleta a matéria.
+     *
+     * @param materia - recebe uma string com nome da matéria como parâmetro em
+     * seguida deleta a matéria.
      */
     public void deletaMateria(String materia) {
 
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
         con.conectaBD();
-        
+
         /**
          * PARA DELETAR A MATÉRIA É PRECISO PRIMEIRO DELETAR AS PERGUNTAS
          * RELACIONADAS À ELA NA TABELA ASK. PRIMEIRO CAPTURAMOS A ID DA
@@ -136,10 +146,8 @@ public class MateriasDAO {
         MateriasDAO matDAO = new MateriasDAO();
         Integer id = matDAO.capturaID(materia); // CAPTURA O ID DA MATERIA SELECIONADA
 
-        
-        String sqlRemovePerguntas = "delete from ask where id_materia = "+id; // DELETA TODAS PERGUNTAS DA MATERIA
+        String sqlRemovePerguntas = "delete from ask where id_materia = " + id; // DELETA TODAS PERGUNTAS DA MATERIA
         String sql = "delete from materia where materia = '" + materia + "'"; // DELETA A MATERIA
-        
 
         try (Statement stmt = con.getConnection().createStatement()) {
             stmt.executeUpdate(sqlRemovePerguntas);
@@ -150,6 +158,6 @@ public class MateriasDAO {
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro na Exclusão de dados." + ex);
             Logger.getLogger(PerguntasDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }
 }
