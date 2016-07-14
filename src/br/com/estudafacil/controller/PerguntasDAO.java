@@ -126,7 +126,7 @@ public class PerguntasDAO {
         ArrayList<Perguntas> lista = new ArrayList<>();
         ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
         con.conectaBD();
-        String sql = "select * from ask order by id";
+        String sql = "select * from ask order by id_materia asc";
 
         try (PreparedStatement stmt = con.getConnection().prepareStatement(sql)) {
             ResultSet rs = stmt.executeQuery();
