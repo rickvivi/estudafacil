@@ -92,6 +92,30 @@ public class MateriasDAO {
         }
         return retorno;
     }
+    
+    
+    public String capturaMaterioaById(int id) {
+        ConexaoHsqldbDAO con = new ConexaoHsqldbDAO();
+        con.conectaBD();
+        String retorno = "";
+
+        String sql = "select materia from materia where id  = " + id ;
+
+        try (PreparedStatement stmt = con.getConnection().prepareStatement(sql)) {
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                retorno = rs.getString("materia");
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro na busca de dados!" + ex);
+            Logger
+                    .getLogger(PerguntasDAO.class
+                            .getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
 
     /**
      * METODO PARA DELETAR A MATÉRIA DO BANCO DE DADOS

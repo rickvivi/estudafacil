@@ -8,30 +8,32 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
  * PAINEL DA TELA DE CADASTRO DE PERGUNTAS
+ *
  * @author Ricardo Vanni
  */
 public class PanelCadPerguntas extends javax.swing.JPanel {
 
     private final Image imagemFundo;
-    
+
     int contador = 0;
     boolean novo = true;
     int indexAltera = -1;
     ArrayList<Perguntas> lista = new ArrayList<>();
     ArrayList<Materias> listaMaterias = new ArrayList<>();
-    
+
     TelaCadPerguntas telaCadPerguntas;
-    
+
     public PanelCadPerguntas(TelaCadPerguntas telaCad) {
         this.telaCadPerguntas = telaCad;
         initComponents();
-        
+
         imagemFundo = new ImageIcon(getClass().getResource("/Botoes/BannerAzul.png")).getImage();
-        
+
         txtPergunta.setVisible(false);
         txtResposta.setVisible(false);
         btgPeriodo.add(rbPrimeiro);
@@ -49,12 +51,13 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
         for (Materias x : listaMaterias) {
             jcbMaterias.addItem(x.getMateria());
         }
-                
+
     }
+
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+
         g.drawImage(imagemFundo, 0, 0, this);
     }
 
@@ -330,7 +333,7 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
     }//GEN-LAST:event_lblCloseMouseMoved
 
     private void lblCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseClicked
-        telaCadPerguntas.dispose();             
+        telaCadPerguntas.dispose();
     }//GEN-LAST:event_lblCloseMouseClicked
 
     private void lblCloseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCloseMouseExited
@@ -366,6 +369,7 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
 
     private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
         PerguntasDAO objPergDAO = new PerguntasDAO();
+        MateriasDAO objMatDAO = new MateriasDAO();
         lista = objPergDAO.carregaListaOrder();
 
         if (lista.size() > 0) {
@@ -391,8 +395,19 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
                     rbSegundo.setSelected(true);
                 }
 
-                //Verifica a Matéria da Pergunta cadastrada.
-                jcbMaterias.setSelectedIndex(lista.get(indexAltera).getId_materia() + 1); //A opção +1 é porque o indice zero começa com "Selecione..."
+                /**
+                 * MODO DE CAPTURAR A MATÉRIA DA QUESTÃO SELECIONADA QUANDO
+                 * CLICAR EM VOLTA
+                 */
+                String mat = objMatDAO.capturaMaterioaById(lista.get(indexAltera).getId_materia());
+                int indiceMat = 0;
+                for (int i = 0; i < jcbMaterias.getItemCount(); i++) {
+                    if (jcbMaterias.getItemAt(i).equals(mat)) {
+                        indiceMat = i;
+                        break;
+                    }
+                }
+                jcbMaterias.setSelectedIndex(indiceMat);
 
             } else {
                 JOptionPane.showMessageDialog(null, "A lista chegou ao início.");
@@ -456,6 +471,7 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
     private void btnDeletaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletaActionPerformed
 
         PerguntasDAO objDeleta = new PerguntasDAO();
+        MateriasDAO objMatDAO = new MateriasDAO();
 
         if (txtPergunta.getText().equals(objDeleta.select(txtPergunta.getText()))) {
             if (txtPergunta.getText().equals("")) {
@@ -482,9 +498,22 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
                         } else {
                             rbSegundo.setSelected(true);
                         }
-
-                        //Verifica a Matéria da Pergunta cadastrada.
-                        jcbMaterias.setSelectedIndex(lista.get(indexAltera).getId_materia() + 1); //A opção +1 é porque o indice zero começa com "Selecione..."
+                        /**
+                         * MODO DE CAPTURAR A MATÉRIA DA QUESTÃO SELECIONADA
+                         * QUANDO CLICAR EM AVANÇA
+                         */
+                        String mat = objMatDAO.capturaMaterioaById(lista.get(indexAltera).getId_materia());
+                        int indiceMat = 0;
+                        for (int i = 0; i < jcbMaterias.getItemCount(); i++) {
+                            if (jcbMaterias.getItemAt(i).equals(mat)) {
+                                indiceMat = i;
+                                break;
+                            }
+                        }
+                        jcbMaterias.setSelectedIndex(indiceMat);
+                        
+//                        //Verifica a Matéria da Pergunta cadastrada.
+//                        jcbMaterias.setSelectedIndex(lista.get(indexAltera).getId_materia() + 1); //A opção +1 é porque o indice zero começa com "Selecione..."
 
                     } else {
                         JOptionPane.showMessageDialog(null, "Não existem registros no Banco de Dados.", "Mensagem de Erro", WIDTH);
@@ -515,6 +544,7 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
 
     private void lblNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMouseClicked
         PerguntasDAO objPergDAO = new PerguntasDAO();
+        MateriasDAO objMatDAO = new MateriasDAO();
         lista = objPergDAO.carregaListaOrder();
 
         if (lista.size() > 0) {
@@ -541,8 +571,19 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
                     rbSegundo.setSelected(true);
                 }
 
-                //Verifica a Matéria da Pergunta cadastrada.
-                jcbMaterias.setSelectedIndex(lista.get(indexAltera).getId_materia() + 1); //A opção +1 é porque o indice zero começa com "Selecione..."
+                /**
+                 * MODO DE CAPTURAR A MATÉRIA DA QUESTÃO SELECIONADA QUANDO
+                 * CLICAR EM AVANÇA
+                 */
+                String mat = objMatDAO.capturaMaterioaById(lista.get(indexAltera).getId_materia());
+                int indiceMat = 0;
+                for (int i = 0; i < jcbMaterias.getItemCount(); i++) {
+                    if (jcbMaterias.getItemAt(i).equals(mat)) {
+                        indiceMat = i;
+                        break;
+                    }
+                }
+                jcbMaterias.setSelectedIndex(indiceMat);
 
             } else {
                 JOptionPane.showMessageDialog(null, "A lista chegou ao fim.");
