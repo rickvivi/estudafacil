@@ -27,7 +27,6 @@ public class TelaSobre extends javax.swing.JDialog {
         setMaximumSize(new java.awt.Dimension(320, 240));
         setMinimumSize(new java.awt.Dimension(320, 240));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(320, 240));
 
         pnPrincipal.setMaximumSize(new java.awt.Dimension(320, 240));
         pnPrincipal.setMinimumSize(new java.awt.Dimension(320, 240));

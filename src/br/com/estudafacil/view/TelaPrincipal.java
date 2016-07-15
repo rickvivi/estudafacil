@@ -66,7 +66,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         });
         mnMenu.add(imnSair);
 
-        imnAjuda.setText("Ajuda");
+        imnAjuda.setText("Informações");
 
         imnSobre.setText("Sobre");
         imnSobre.addActionListener(new java.awt.event.ActionListener() {

@@ -14,7 +14,7 @@
         </Menu>
         <Menu class="javax.swing.JMenu" name="imnAjuda">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Ajuda"/>
+            <Property name="text" type="java.lang.String" value="Informa&#xe7;&#xf5;es"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="imnSobre">
