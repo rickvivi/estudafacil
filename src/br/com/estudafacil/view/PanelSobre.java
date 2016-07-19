@@ -24,6 +24,7 @@ public class PanelSobre extends javax.swing.JPanel {
         initComponents();
         
         img = new ImageIcon(getClass().getResource("/Botoes/fundo_sobre.JPG")).getImage();
+                
     }
 
     public void paintComponent(Graphics g){
