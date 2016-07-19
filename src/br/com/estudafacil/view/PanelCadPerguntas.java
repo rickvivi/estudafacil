@@ -457,9 +457,13 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
                 } else {
                     objPergunta.setPeriodo(1);
                 }
-                //ADICIONA A MATERIA AO OBJETO PERGUNTA
-                objPergunta.setId_materia(jcbMaterias.getSelectedIndex() - 1);
+                //ADICIONA O ID DA MATERIA AO OBJETO PERGUNTA
+                MateriasDAO objMatDAO = new MateriasDAO();
+                String mat = (String) jcbMaterias.getSelectedItem();                
+                int idMat = objMatDAO.capturaID(mat);                
+                objPergunta.setId_materia(idMat);
 
+                //EXECUTA O UPDATE
                 objAltera.update(objPergunta);
             }
         }
@@ -511,10 +515,9 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
                             }
                         }
                         jcbMaterias.setSelectedIndex(indiceMat);
-                        
+
 //                        //Verifica a Matéria da Pergunta cadastrada.
 //                        jcbMaterias.setSelectedIndex(lista.get(indexAltera).getId_materia() + 1); //A opção +1 é porque o indice zero começa com "Selecione..."
-
                     } else {
                         JOptionPane.showMessageDialog(null, "Não existem registros no Banco de Dados.", "Mensagem de Erro", WIDTH);
                         txtPergunta.setText("");

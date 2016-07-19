@@ -41,10 +41,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         pnPrincipal = new javax.swing.JPanel();
-        mnMenu = new javax.swing.JMenuBar();
-        imnSair = new javax.swing.JMenu();
-        imnAjuda = new javax.swing.JMenu();
-        imnSobre = new javax.swing.JMenuItem();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(925, 560));
@@ -58,27 +57,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
         pnPrincipal.setRequestFocusEnabled(false);
         pnPrincipal.setLayout(new java.awt.BorderLayout());
 
-        imnSair.setText("Sair");
-        imnSair.addMouseListener(new java.awt.event.MouseAdapter() {
+        jMenuBar1.setBackground(new java.awt.Color(255, 255, 255));
+        jMenuBar1.setBorder(null);
+
+        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/btnFechar.png"))); // NOI18N
+        jMenu1.setText("Sair     ");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                imnSairMouseClicked(evt);
+                jMenu1MouseClicked(evt);
             }
         });
-        mnMenu.add(imnSair);
+        jMenuBar1.add(jMenu1);
 
-        imnAjuda.setText("Informações");
+        jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/btAjuda.png"))); // NOI18N
+        jMenu2.setText("Ajuda");
+        jMenuBar1.add(jMenu2);
 
-        imnSobre.setText("Sobre");
-        imnSobre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                imnSobreActionPerformed(evt);
-            }
-        });
-        imnAjuda.add(imnSobre);
-
-        mnMenu.add(imnAjuda);
-
-        setJMenuBar(mnMenu);
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,14 +90,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void imnSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_imnSairMouseClicked
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         System.exit(0);
-    }//GEN-LAST:event_imnSairMouseClicked
-
-    private void imnSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imnSobreActionPerformed
-        TelaSobre tela = new TelaSobre(this, true);
-        tela.setVisible(true);
-    }//GEN-LAST:event_imnSobreActionPerformed
+    }//GEN-LAST:event_jMenu1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -140,10 +130,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu imnAjuda;
-    private javax.swing.JMenu imnSair;
-    private javax.swing.JMenuItem imnSobre;
-    private javax.swing.JMenuBar mnMenu;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel pnPrincipal;
     // End of variables declaration//GEN-END:variables
 
