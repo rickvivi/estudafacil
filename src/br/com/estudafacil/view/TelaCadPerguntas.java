@@ -1,11 +1,16 @@
 package br.com.estudafacil.view;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  * TELA DE CADASTRO DE PERGUNTAS
  * @author Ricardo Vanni
  */
 public class TelaCadPerguntas extends javax.swing.JDialog {
 
+    private final Image img;
+    
     public TelaCadPerguntas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -13,6 +18,8 @@ public class TelaCadPerguntas extends javax.swing.JDialog {
         PanelCadPerguntas painel = new PanelCadPerguntas(this);
         pnPrincipal.add(painel);
         
+        img = new ImageIcon(getClass().getResource("/Botoes/logotipo.png")).getImage();
+        this.setIconImage(img);
     }
     
     public void fechaDialogo(){

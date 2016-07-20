@@ -27,7 +27,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         PanelPrincipal painel = new PanelPrincipal(this);
         pnPrincipal.add(painel);
         
-
     }
 
     public void recebePainel(JPanel pn) {

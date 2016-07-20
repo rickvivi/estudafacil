@@ -1,5 +1,8 @@
 package br.com.estudafacil.view;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  * TELA DO PAINEL DE ESCOLHA DE MATERIA E PERIODO QUE DESEJA ESTUDAR
  * @author Ricardo Vanni
@@ -8,6 +11,7 @@ public class TelaEscolhaEstudo extends javax.swing.JDialog {
 
     
     TelaPrincipal telaPrinc;
+    private final Image img;
     
     public TelaEscolhaEstudo(java.awt.Frame parent, boolean modal, TelaPrincipal telaPrincipal) {
         super(parent, modal);
@@ -16,6 +20,9 @@ public class TelaEscolhaEstudo extends javax.swing.JDialog {
         
         PanelEscolhaEstuda painel = new PanelEscolhaEstuda(telaPrinc, this);
         pnPrincipal.add(painel);
+        
+        img = new ImageIcon(getClass().getResource("/Botoes/logotipo.png")).getImage();
+        this.setIconImage(img);
     }
 
     @SuppressWarnings("unchecked")

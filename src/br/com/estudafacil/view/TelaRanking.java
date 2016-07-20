@@ -1,5 +1,8 @@
 package br.com.estudafacil.view;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  * TELA DE RANKING DE PERFORMANCE.
  * NESSA TELA SERÁ EXIBIDA AS OITO MELHORES PERFORMANCES
@@ -9,7 +12,7 @@ package br.com.estudafacil.view;
 public class TelaRanking extends javax.swing.JDialog {
 
     TelaPrincipal telaPrincipal;
-    
+    private final Image img;
         
     public TelaRanking(java.awt.Frame parent, boolean modal, TelaPrincipal tp) {
         super(parent, modal);
@@ -22,6 +25,8 @@ public class TelaRanking extends javax.swing.JDialog {
          */
         PanelRanking panel = new PanelRanking(telaPrincipal, this);
         this.pnPrincipal.add(panel);
+        img = new ImageIcon(getClass().getResource("/Botoes/logotipo.png")).getImage();
+        this.setIconImage(img);
     }
 
     @SuppressWarnings("unchecked")

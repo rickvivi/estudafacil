@@ -1,11 +1,15 @@
 package br.com.estudafacil.view;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  * TELA DE CADASTRO DE MATÉRIAS
  * @author Ricardo Vanni
  */
 public class TelaCadMaterias extends javax.swing.JDialog {
 
+    private final Image img;
     
     public TelaCadMaterias(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -13,6 +17,9 @@ public class TelaCadMaterias extends javax.swing.JDialog {
 
         PanelCadMaterias painel = new PanelCadMaterias(this);
         pnPrincipal.add(painel);
+        
+        img = new ImageIcon(getClass().getResource("/Botoes/logotipo.png")).getImage();
+        this.setIconImage(img);
 
     }
 

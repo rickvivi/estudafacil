@@ -1,7 +1,9 @@
 package br.com.estudafacil.view;
 
 import br.com.estudafacil.model.Perguntas;
+import java.awt.Image;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 /**
  * TELA DE ESTUDO.
@@ -13,6 +15,7 @@ import java.util.ArrayList;
 public class TelaEstudo extends javax.swing.JFrame {
 
     TelaPrincipal telaPrinc;
+    private final Image img;
     
     //VARÍAVEIS PARA RECEBER PARAMETROS DA MATERIA SELECIONADA
     private PanelEscolhaEstuda pnEscEst;
@@ -32,6 +35,9 @@ public class TelaEstudo extends javax.swing.JFrame {
         PanelEstudo panelEstudo = new PanelEstudo(this ,telaPrinc, materia, periodo, lista);
         
         this.pnPrincipal.add(panelEstudo);
+        
+        img = new ImageIcon(getClass().getResource("/Botoes/logotipo.png")).getImage();
+        this.setIconImage(img);
        
     }
     

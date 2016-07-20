@@ -1,11 +1,16 @@
 package br.com.estudafacil.view;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+
 /**
  *  TELA 'SOBRE'
  * @author DES4
  */
 public class TelaSobre extends javax.swing.JDialog {
 
+    private final Image img;
+    
     public TelaSobre(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -13,6 +18,8 @@ public class TelaSobre extends javax.swing.JDialog {
         PanelSobre panel = new PanelSobre(this);
         this.pnPrincipal.add(panel);
         
+        img = new ImageIcon(getClass().getResource("/Botoes/logotipo.png")).getImage();
+        this.setIconImage(img);
         
         
     }
