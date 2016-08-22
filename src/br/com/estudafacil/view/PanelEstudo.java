@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 
 /**
  * PAINEL PARA TELA DE ESTUDOS
@@ -55,6 +56,7 @@ public class PanelEstudo extends javax.swing.JPanel {
         img2 = new ImageIcon(getClass().getResource("/Botoes/pergunta.jpeg")).getImage();
 
         initComponents();
+ 
 
         lblMateriaSelecionada.setText(materia); // EXIBE A MATERIA SELECIONADA NO PAINEL
         // EXIBE O PERIODO SELECIONADO NO PAINEL
@@ -86,7 +88,8 @@ public class PanelEstudo extends javax.swing.JPanel {
         // ATRIBUI O TOTAL DE PERGUNTAS A VARIAVEL E EXIBE NA TELA
         totalPerguntas = lista.size();
         lblQuantidade.setText("Questão " + ++indexAsk + " de " + totalPerguntas);
-
+        
+        txtResposta.requestFocus();
     }
 
     public void paintComponent(Graphics g) {
@@ -103,10 +106,6 @@ public class PanelEstudo extends javax.swing.JPanel {
         lblTitulo = new javax.swing.JLabel();
         lblMateriaSelecionada = new javax.swing.JLabel();
         lblPergunta = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        txtPergunta = new javax.swing.JTextPane();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        txtResposta = new javax.swing.JTextPane();
         lblRespCorreta = new javax.swing.JLabel();
         lblResposta = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -119,6 +118,10 @@ public class PanelEstudo extends javax.swing.JPanel {
         lblQuantidade = new javax.swing.JLabel();
         lblBtnConfere = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtResposta = new javax.swing.JTextPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtPergunta = new javax.swing.JTextPane();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -158,16 +161,6 @@ public class PanelEstudo extends javax.swing.JPanel {
         lblPergunta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/lblPergunta.png"))); // NOI18N
         lblPergunta.setText(" ");
 
-        txtPergunta.setEditable(false);
-        txtPergunta.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 153, 255), new java.awt.Color(0, 0, 255)), null));
-        txtPergunta.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jScrollPane4.setViewportView(txtPergunta);
-
-        txtResposta.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(153, 153, 255), new java.awt.Color(0, 0, 255)), null));
-        txtResposta.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        txtResposta.setForeground(new java.awt.Color(0, 0, 204));
-        jScrollPane5.setViewportView(txtResposta);
-
         lblRespCorreta.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lblRespCorreta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRespCorreta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/lblRespCorreta.png"))); // NOI18N
@@ -179,6 +172,9 @@ public class PanelEstudo extends javax.swing.JPanel {
         txtRespCorreta.setEditable(false);
         txtRespCorreta.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         txtRespCorreta.setForeground(new java.awt.Color(0, 102, 0));
+        txtRespCorreta.setMaximumSize(new java.awt.Dimension(4, 26));
+        txtRespCorreta.setMinimumSize(new java.awt.Dimension(4, 26));
+        txtRespCorreta.setPreferredSize(new java.awt.Dimension(4, 26));
         jScrollPane3.setViewportView(txtRespCorreta);
 
         lblPeriodoSelecionado.setFont(new java.awt.Font("Arial Rounded MT Bold", 3, 24)); // NOI18N
@@ -225,6 +221,16 @@ public class PanelEstudo extends javax.swing.JPanel {
         jLabel5.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         jLabel5.setText("Developed by Ricardo Vanni");
 
+        txtResposta.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 51, 255), new java.awt.Color(0, 102, 255)));
+        txtResposta.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        txtResposta.setForeground(new java.awt.Color(0, 0, 204));
+        jScrollPane2.setViewportView(txtResposta);
+
+        txtPergunta.setEditable(false);
+        txtPergunta.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 0, 255), new java.awt.Color(51, 102, 255)));
+        txtPergunta.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        jScrollPane1.setViewportView(txtPergunta);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -246,12 +252,14 @@ public class PanelEstudo extends javax.swing.JPanel {
                 .addContainerGap(102, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane5)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
-                            .addComponent(jScrollPane4))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 730, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -269,7 +277,8 @@ public class PanelEstudo extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(lblQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addContainerGap())))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblRespCorreta)
                         .addGap(204, 204, 204)
                         .addComponent(lblBtnConfere, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,12 +300,13 @@ public class PanelEstudo extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(lblClose)))
                 .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblResposta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                        .addComponent(lblResposta, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -307,11 +317,10 @@ public class PanelEstudo extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblIconErradas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblErradas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(6, 6, 6)))
+                        .addGap(117, 117, 117)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblBtnConfere, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblRespCorreta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -712,9 +721,9 @@ public class PanelEstudo extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JLabel lblBtnConfere;
     private javax.swing.JLabel lblCertas;
     private javax.swing.JLabel lblClose;
