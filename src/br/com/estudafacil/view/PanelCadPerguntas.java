@@ -364,70 +364,80 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
      * FUNÇÕES DO BOTÇÃO DE VOLTAR DAS QUESTÕES
      */
     private void lblBackMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseMoved
-        lblBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/left_mouse.png")));
+        if (lblBack.isEnabled()) {
+            lblBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/left_mouse.png")));
+        }
     }//GEN-LAST:event_lblBackMouseMoved
 
     private void lblBackMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseClicked
-        PerguntasDAO objPergDAO = new PerguntasDAO();
-        MateriasDAO objMatDAO = new MateriasDAO();
-        lista = objPergDAO.carregaListaOrder();
+        if (lblBack.isEnabled()) {
+            PerguntasDAO objPergDAO = new PerguntasDAO();
+            MateriasDAO objMatDAO = new MateriasDAO();
+            lista = objPergDAO.carregaListaOrder();
 
-        if (lista.size() > 0) {
+            if (lista.size() > 0) {
 
-            novo = true;
-            btnGravar.setText("NOVO");
-            jcbMaterias.setEnabled(true);
-            rbPrimeiro.setEnabled(true);
-            rbSegundo.setEnabled(true);
+                novo = true;
+                btnGravar.setText("NOVO");
+                jcbMaterias.setEnabled(true);
+                rbPrimeiro.setEnabled(true);
+                rbSegundo.setEnabled(true);
 
-            txtPergunta.setVisible(true);
-            txtResposta.setVisible(true);
+                txtPergunta.setVisible(true);
+                txtResposta.setVisible(true);
 
-            indexAltera--;
-            if (indexAltera < lista.size() && indexAltera >= 0) {
-                txtPergunta.setText(lista.get(indexAltera).getPergunta());
-                txtResposta.setText(lista.get(indexAltera).getResposta());
+                indexAltera--;
+                if (indexAltera < lista.size() && indexAltera >= 0) {
+                    txtPergunta.setText(lista.get(indexAltera).getPergunta());
+                    txtResposta.setText(lista.get(indexAltera).getResposta());
 
-                //Verifica se a PergunTa cadastrada é de Primeiro ou Segundo Bimestre
-                if (lista.get(indexAltera).getPeriodo().equals(0)) {
-                    rbPrimeiro.setSelected(true);
-                } else {
-                    rbSegundo.setSelected(true);
-                }
-
-                /**
-                 * MODO DE CAPTURAR A MATÉRIA DA QUESTÃO SELECIONADA QUANDO
-                 * CLICAR EM VOLTA
-                 */
-                String mat = objMatDAO.capturaMaterioaById(lista.get(indexAltera).getId_materia());
-                int indiceMat = 0;
-                for (int i = 0; i < jcbMaterias.getItemCount(); i++) {
-                    if (jcbMaterias.getItemAt(i).equals(mat)) {
-                        indiceMat = i;
-                        break;
+                    //Verifica se a PergunTa cadastrada é de Primeiro ou Segundo Bimestre
+                    if (lista.get(indexAltera).getPeriodo().equals(0)) {
+                        rbPrimeiro.setSelected(true);
+                    } else {
+                        rbSegundo.setSelected(true);
                     }
-                }
-                jcbMaterias.setSelectedIndex(indiceMat);
 
+                    /**
+                     * MODO DE CAPTURAR A MATÉRIA DA QUESTÃO SELECIONADA QUANDO
+                     * CLICAR EM VOLTA
+                     */
+                    String mat = objMatDAO.capturaMaterioaById(lista.get(indexAltera).getId_materia());
+                    int indiceMat = 0;
+                    for (int i = 0; i < jcbMaterias.getItemCount(); i++) {
+                        if (jcbMaterias.getItemAt(i).equals(mat)) {
+                            indiceMat = i;
+                            break;
+                        }
+                    }
+                    jcbMaterias.setSelectedIndex(indiceMat);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "A lista chegou ao início.");
+                    indexAltera = 0;
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "A lista chegou ao início.");
-                indexAltera = 0;
+                JOptionPane.showMessageDialog(null, "Não Existem Registros no Banco de Dados.", "Banco Vazio!", HEIGHT);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Não Existem Registros no Banco de Dados.", "Banco Vazio!", HEIGHT);
         }
     }//GEN-LAST:event_lblBackMouseClicked
 
     private void lblBackMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseExited
-        lblBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/left_normal.png")));
+        if (lblBack.isEnabled()) {
+            lblBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/left_normal.png")));
+        }
     }//GEN-LAST:event_lblBackMouseExited
 
     private void lblBackMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMousePressed
-        lblBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/left_clicado.png")));
+        if (lblBack.isEnabled()) {
+            lblBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/left_clicado.png")));
+        }
     }//GEN-LAST:event_lblBackMousePressed
 
     private void lblBackMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblBackMouseReleased
-        lblBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/left_normal.png")));
+        if (lblBack.isEnabled()) {
+            lblBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/left_normal.png")));
+        }
     }//GEN-LAST:event_lblBackMouseReleased
 
     /**
@@ -459,8 +469,8 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
                 }
                 //ADICIONA O ID DA MATERIA AO OBJETO PERGUNTA
                 MateriasDAO objMatDAO = new MateriasDAO();
-                String mat = (String) jcbMaterias.getSelectedItem();                
-                int idMat = objMatDAO.capturaID(mat);                
+                String mat = (String) jcbMaterias.getSelectedItem();
+                int idMat = objMatDAO.capturaID(mat);
                 objPergunta.setId_materia(idMat);
 
                 //EXECUTA O UPDATE
@@ -542,71 +552,81 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
      * FUNÇÕES DO BOTÃO DE AVANÇÃR AS QUESTÕES
      */
     private void lblNextMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMouseMoved
-        lblNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/right_mouse.png")));
+        if (lblNext.isEnabled()) {
+            lblNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/right_mouse.png")));
+        }
     }//GEN-LAST:event_lblNextMouseMoved
 
     private void lblNextMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMouseClicked
-        PerguntasDAO objPergDAO = new PerguntasDAO();
-        MateriasDAO objMatDAO = new MateriasDAO();
-        lista = objPergDAO.carregaListaOrder();
+        if (lblNext.isEnabled()) {
+            PerguntasDAO objPergDAO = new PerguntasDAO();
+            MateriasDAO objMatDAO = new MateriasDAO();
+            lista = objPergDAO.carregaListaOrder();
 
-        if (lista.size() > 0) {
+            if (lista.size() > 0) {
 
-            novo = true;
-            btnGravar.setText("NOVO");
-            jcbMaterias.setEnabled(true);
-            rbPrimeiro.setEnabled(true);
-            rbSegundo.setEnabled(true);
+                novo = true;
+                btnGravar.setText("NOVO");
+                jcbMaterias.setEnabled(true);
+                rbPrimeiro.setEnabled(true);
+                rbSegundo.setEnabled(true);
 
-            txtPergunta.setVisible(true);
-            txtResposta.setVisible(true);
+                txtPergunta.setVisible(true);
+                txtResposta.setVisible(true);
 
-            indexAltera++;
+                indexAltera++;
 
-            if (indexAltera < lista.size()) {
-                txtPergunta.setText(lista.get(indexAltera).getPergunta());
-                txtResposta.setText(lista.get(indexAltera).getResposta());
+                if (indexAltera < lista.size()) {
+                    txtPergunta.setText(lista.get(indexAltera).getPergunta());
+                    txtResposta.setText(lista.get(indexAltera).getResposta());
 
-                //Verifica se a PergunTa cadastrada é de Primeiro ou Segundo Bimestre
-                if (lista.get(indexAltera).getPeriodo().equals(0)) {
-                    rbPrimeiro.setSelected(true);
-                } else {
-                    rbSegundo.setSelected(true);
-                }
-
-                /**
-                 * MODO DE CAPTURAR A MATÉRIA DA QUESTÃO SELECIONADA QUANDO
-                 * CLICAR EM AVANÇA
-                 */
-                String mat = objMatDAO.capturaMaterioaById(lista.get(indexAltera).getId_materia());
-                int indiceMat = 0;
-                for (int i = 0; i < jcbMaterias.getItemCount(); i++) {
-                    if (jcbMaterias.getItemAt(i).equals(mat)) {
-                        indiceMat = i;
-                        break;
+                    //Verifica se a PergunTa cadastrada é de Primeiro ou Segundo Bimestre
+                    if (lista.get(indexAltera).getPeriodo().equals(0)) {
+                        rbPrimeiro.setSelected(true);
+                    } else {
+                        rbSegundo.setSelected(true);
                     }
-                }
-                jcbMaterias.setSelectedIndex(indiceMat);
 
+                    /**
+                     * MODO DE CAPTURAR A MATÉRIA DA QUESTÃO SELECIONADA QUANDO
+                     * CLICAR EM AVANÇA
+                     */
+                    String mat = objMatDAO.capturaMaterioaById(lista.get(indexAltera).getId_materia());
+                    int indiceMat = 0;
+                    for (int i = 0; i < jcbMaterias.getItemCount(); i++) {
+                        if (jcbMaterias.getItemAt(i).equals(mat)) {
+                            indiceMat = i;
+                            break;
+                        }
+                    }
+                    jcbMaterias.setSelectedIndex(indiceMat);
+
+                } else {
+                    JOptionPane.showMessageDialog(null, "A lista chegou ao fim.");
+                    indexAltera = lista.size() - 1;
+                }
             } else {
-                JOptionPane.showMessageDialog(null, "A lista chegou ao fim.");
-                indexAltera = lista.size() - 1;
+                JOptionPane.showMessageDialog(null, "Não Existem Registros no Banco de Dados.", "Banco Vazio!", HEIGHT);
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "Não Existem Registros no Banco de Dados.", "Banco Vazio!", HEIGHT);
         }
     }//GEN-LAST:event_lblNextMouseClicked
 
     private void lblNextMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMouseExited
-        lblNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/right_normal.png")));
+        if (lblNext.isEnabled()) {
+            lblNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/right_normal.png")));
+        }
     }//GEN-LAST:event_lblNextMouseExited
 
     private void lblNextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMousePressed
-        lblNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/right_clicado.png")));
+        if (lblNext.isEnabled()) {
+            lblNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/right_clicado.png")));
+        }
     }//GEN-LAST:event_lblNextMousePressed
 
     private void lblNextMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblNextMouseReleased
-        lblNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/right_normal.png")));
+        if (lblNext.isEnabled()) {
+            lblNext.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/right_normal.png")));
+        }
     }//GEN-LAST:event_lblNextMouseReleased
 
     /**
@@ -616,6 +636,12 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
         txtPergunta.setVisible(true);
         txtResposta.setVisible(true);
         if (novo) {
+
+            btnAltera.setEnabled(false);
+            btnDeleta.setEnabled(false);
+            lblBack.setEnabled(false);
+            lblNext.setEnabled(false);
+
             btnGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Botoes/save1.png")));
             rbPrimeiro.setEnabled(true);
             rbSegundo.setEnabled(true);
@@ -667,6 +693,11 @@ public class PanelCadPerguntas extends javax.swing.JPanel {
                 txtResposta.setText("");
                 txtPergunta.requestFocus();
             } else {
+                btnAltera.setEnabled(true);
+                btnDeleta.setEnabled(true);
+                lblBack.setEnabled(true);
+                lblNext.setEnabled(true);
+
                 rbPrimeiro.setEnabled(false);
                 rbSegundo.setEnabled(false);
                 jcbMaterias.setEnabled(false);
